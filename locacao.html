@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alphasec | Locação</title>
+  <meta name="description" content="Locação de equipamentos e soluções de segurança eletrônica com planos flexíveis." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+
+  <div class="topbar py-2 d-none d-lg-block">
+    <div class="container d-flex justify-content-between align-items-center small">
+      <div class="text-muted">
+        <span class="me-3">📍 Santo André - SP</span>
+        <span>✉️ <a class="link-muted" href="mailto:contato@alphasec.com.br">contato@alphasec.com.br</a></span>
+      </div>
+      <a class="btn btn-sm btn-warning" href="#" id="topbarWhatsapp">WhatsApp</a>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">Alphasec</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="menu" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+          <li class="nav-item"><a class="nav-link" href="servicos.html">Serviços</a></li>
+          <li class="nav-item"><a class="nav-link active" href="locacao.html">Locação</a></li>
+          <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
+        </ul>
+        <div class="ms-lg-3 d-grid d-lg-block gap-2 mt-3 mt-lg-0">
+          <a class="btn btn-outline-dark" href="contato.html">Solicitar Orçamento</a>
+          <a class="btn btn-warning" href="#" id="navWhatsapp">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-hero" data-hero="locacao">
+    <div class="container">
+      <div class="reveal">
+        <span class="badge badge-premium mb-3">Locação</span>
+        <h1 class="fw-bold">Segurança sem investimento alto inicial</h1>
+        <p class="text-muted mb-0">Planos flexíveis com suporte e manutenção inclusos.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="card-soft p-4 reveal">
+            <h2 class="fw-bold">Como funciona</h2>
+            <p class="text-muted mt-3">
+              A locação é ideal pra quem quer iniciar rápido e com previsibilidade de custo.
+              Você recebe os equipamentos e suporte inclusos no plano.
+            </p>
+
+            <ul class="text-muted mb-0">
+              <li>Equipamentos + instalação</li>
+              <li>Suporte e manutenção preventiva</li>
+              <li>Planos ajustados ao seu ambiente</li>
+              <li>Possibilidade de upgrades</li>
+            </ul>
+
+            <a class="btn btn-warning mt-4" href="#" id="ctaWhatsapp">Tirar dúvidas no WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card-soft p-4 reveal">
+            <h2 class="fw-bold">Simule seu plano</h2>
+            <p class="text-muted">Preencha e envie direto pro WhatsApp com a mensagem pronta.</p>
+
+            <form id="locacaoForm">
+              <div class="mb-2">
+                <label class="form-label">Nome</label>
+                <input class="form-control" name="nome" required>
+              </div>
+
+              <div class="mb-2">
+                <label class="form-label">Tipo de local</label>
+                <select class="form-select" name="tipo" required>
+                  <option value="" selected disabled>Selecione</option>
+                  <option>Empresa</option>
+                  <option>Condomínio</option>
+                  <option>Residência</option>
+                  <option>Comércio</option>
+                </select>
+              </div>
+
+              <div class="mb-2">
+                <label class="form-label">Qtd. aproximada de câmeras</label>
+                <input class="form-control" name="qtd" placeholder="Ex.: 8">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Necessidade</label>
+                <textarea class="form-control" name="necessidade" rows="4" placeholder="Ex.: CFTV + controle de acesso + LPR"></textarea>
+              </div>
+
+              <button class="btn btn-dark w-100" type="submit">Enviar no WhatsApp</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-4 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <div class="small">© <span id="ano"></span> Alphasec — Segurança Eletrônica</div>
+        <div class="small text-muted">Santo André - SP • contato@alphasec.com.br</div>
+      </div>
+    </div>
+  </footer>
+
+  <a class="to-top" id="toTop" href="javascript:void(0)" aria-label="Voltar ao topo">↑</a>
+  <a class="whatsapp-float" href="#" id="floatWhatsapp" aria-label="Falar no WhatsApp">
+    <span class="wa-icon">✆</span>
+    <span class="d-none d-md-inline">WhatsApp</span>
+  </a>
+
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-inner">
+      <div>
+        <div class="fw-bold">Cookies</div>
+        <div class="small text-muted">Usamos cookies para melhorar a experiência no site.</div>
+      </div>
+      <div class="cookie-actions">
+        <button class="btn btn-outline-dark btn-sm" id="cookieRecusar">Recusar</button>
+        <button class="btn btn-dark btn-sm" id="cookieAceitar">Aceitar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>
