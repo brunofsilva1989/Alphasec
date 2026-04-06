@@ -146,4 +146,49 @@
   document.querySelectorAll("a[data-email]").forEach((a) => {
     a.setAttribute("href", `mailto:${EMAIL}`);
   });
+
+  // -------------------------
+  // Formulário de contato — envio via PHP
+  // -------------------------
+  const contatoForm = document.getElementById("contatoForm");
+  if (contatoForm) {
+    contatoForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const btn = document.getElementById("btnEnviar");
+      const feedback = document.getElementById("formFeedback");
+
+      btn.disabled = true;
+      btn.textContent = "Enviando…";
+      feedback.className = "mt-3 d-none alert";
+      feedback.textContent = "";
+
+      try {
+        const res = await fetch("enviar-contato.php", {
+          method: "POST",
+          body: new FormData(contatoForm),
+        });
+
+        const data = await res.json();
+
+        feedback.textContent = data.mensagem;
+        feedback.classList.remove("d-none");
+
+        if (data.sucesso) {
+          feedback.classList.add("alert-success");
+          contatoForm.reset();
+        } else {
+          feedback.classList.add("alert-danger");
+        }
+      } catch {
+        feedback.classList.remove("d-none");
+        feedback.classList.add("alert-danger");
+        feedback.textContent =
+          "Erro de conexão. Tente novamente ou fale pelo WhatsApp.";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Enviar mensagem";
+      }
+    });
+  }
 })();
