@@ -4,7 +4,7 @@
   // =========================
   // Formato: 55 + DDD + número (somente dígitos)
   // Ex.: 5511999999999
-  const WHATSAPP_NUMBER = "5511999999999";
+  const WHATSAPP_NUMBER = "5511959118648";
   const EMAIL = "contato@alphasec.com.br";
   const CIDADE = "Santo André - SP";
 
