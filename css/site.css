@@ -179,6 +179,13 @@ img { max-width: 100%; height: auto; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-soft);
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+  cursor: default;
+}
+.card-soft:hover {
+  transform: translateY(-14px) scale(1.06);
+  box-shadow: 0 24px 56px rgba(2,6,23,.22);
+  border-color: var(--yellow);
 }
 
 /* Service card com imagem */
@@ -264,6 +271,13 @@ img { max-width: 100%; height: auto; }
   box-shadow: var(--shadow-soft);
   height: 100%;
   text-align: center;
+  transition: transform .28s ease, box-shadow .28s ease;
+  cursor: default;
+}
+.stat:hover {
+  transform: translateY(-14px) scale(1.06);
+  box-shadow: 0 24px 56px rgba(2,6,23,.22);
+  border-color: var(--yellow);
 }
 .stat .num {
   font-size: 2.1rem; font-weight: 800;
