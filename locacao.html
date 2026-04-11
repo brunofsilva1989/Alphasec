@@ -1,30 +1,36 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-br">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Alphasec | Locação</title>
-  <meta name="description" content="Locação de equipamentos e soluções de segurança eletrônica com planos flexíveis." />
+  <title>Alphasec | Locação de Equipamentos de Segurança</title>
+  <meta name="description" content="Locação de sistemas de segurança eletrônica com instalação, suporte e manutenção inclusos. Planos flexíveis para empresas e condomínios." />
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="css/site.css" />
 </head>
 <body>
 
+  <!-- TOPBAR -->
   <div class="topbar py-2 d-none d-lg-block">
     <div class="container d-flex justify-content-between align-items-center small">
-      <div class="text-muted">
-        <span class="me-3">📍 Santo André - SP</span>
-        <span>✉️ <a class="link-muted" href="mailto:contato@alphasec.com.br">contato@alphasec.com.br</a></span>
+      <div class="text-muted d-flex align-items-center gap-3 flex-wrap">
+        <span><i class="bi bi-geo-alt-fill me-1"></i>Santo André - SP</span>
+        <span><i class="bi bi-telephone-fill me-1"></i>(11) 95911-8648</span>
+        <span><i class="bi bi-envelope-fill me-1"></i><a class="link-muted" href="mailto:contato@alphasec.com.br">contato@alphasec.com.br</a></span>
       </div>
-      <a class="btn btn-sm btn-warning" href="#" id="topbarWhatsapp">WhatsApp</a>
+      <a class="btn btn-sm btn-warning" href="#" id="topbarWhatsapp">
+        <i class="bi bi-whatsapp me-1"></i>WhatsApp
+      </a>
     </div>
   </div>
 
+  <!-- NAV -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
     <div class="container">
       <a class="navbar-brand" href="index.html">
-        <img src="img/Alphasec.png" alt="Alphasec Logo" style="height:48px; width:auto;" />
+        <img src="img/Alphasec.png" alt="Alphasec" style="height:48px;width:auto;" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
         <span class="navbar-toggler-icon"></span>
@@ -32,102 +38,257 @@
       <div id="menu" class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto gap-lg-2">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+          <li class="nav-item"><a class="nav-link" href="quem-somos.html">Quem Somos</a></li>
           <li class="nav-item"><a class="nav-link" href="servicos.html">Serviços</a></li>
           <li class="nav-item"><a class="nav-link active" href="locacao.html">Locação</a></li>
           <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
         </ul>
-        <div class="ms-lg-3 d-grid d-lg-block gap-2 mt-3 mt-lg-0">
+        <div class="ms-lg-3 d-grid d-lg-flex gap-2 mt-3 mt-lg-0">
           <a class="btn btn-outline-dark" href="contato.html">Solicitar Orçamento</a>
-          <a class="btn btn-warning" href="#" id="navWhatsapp">WhatsApp</a>
+          <a class="btn btn-warning" href="#" id="navWhatsapp"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>
         </div>
       </div>
     </div>
   </nav>
 
-  <header class="page-hero" data-hero="locacao">
+  <!-- PAGE HERO com slider -->
+  <header class="page-hero">
+    <div class="hero-slides">
+      <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1606761568499-6d2451b23c66?auto=format&fit=crop&w=1600&q=80')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1600&q=80')"></div>
+    </div>
+    <div class="hero-overlay"></div>
     <div class="container">
       <div class="reveal">
-        <span class="badge badge-premium mb-3">Locação</span>
-        <h1 class="fw-bold">Segurança sem investimento alto inicial</h1>
-        <p class="text-muted mb-0">Planos flexíveis com suporte e manutenção inclusos.</p>
+        <span class="badge-premium mb-3 d-inline-flex"><i class="bi bi-box-seam me-1"></i>Planos flexíveis</span>
+        <h1 class="fw-bold display-5">Locação de Equipamentos</h1>
+        <p class="text-muted mb-0 fs-5">Segurança profissional sem alto investimento inicial. Suporte e manutenção inclusos.</p>
       </div>
     </div>
   </header>
 
-  <main class="py-5">
+  <!-- BENEFÍCIOS -->
+  <section class="py-5">
     <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-6">
-          <div class="card-soft p-4 reveal">
-            <h2 class="fw-bold">Como funciona</h2>
-            <p class="text-muted mt-3">
-              A locação é ideal pra quem quer iniciar rápido e com previsibilidade de custo.
-              Você recebe os equipamentos e suporte inclusos no plano.
-            </p>
-
-            <ul class="text-muted mb-0">
-              <li>Equipamentos + instalação</li>
-              <li>Suporte e manutenção preventiva</li>
-              <li>Planos ajustados ao seu ambiente</li>
-              <li>Possibilidade de upgrades</li>
-            </ul>
-
-            <a class="btn btn-warning mt-4" href="#" id="ctaWhatsapp">Tirar dúvidas no WhatsApp</a>
+      <div class="text-center mb-5 reveal">
+        <span class="badge-premium mb-2 d-inline-flex">Por que locar?</span>
+        <h2 class="fw-bold mb-1">Segurança completa, custo previsível</h2>
+        <p class="text-muted mb-0">A locação é ideal para empresas que querem começar rápido e com orçamento controlado.</p>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-3">
+          <div class="mvv-card reveal">
+            <div class="mvv-icon"><i class="bi bi-currency-dollar"></i></div>
+            <h5>Sem investimento alto</h5>
+            <p>Equipamentos inclusos no plano mensal. Sem desembolso inicial elevado.</p>
           </div>
         </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="mvv-card reveal">
+            <div class="mvv-icon"><i class="bi bi-tools"></i></div>
+            <h5>Instalação inclusa</h5>
+            <p>Nossa equipe instala tudo corretamente. Você não precisa se preocupar com nada.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="mvv-card reveal">
+            <div class="mvv-icon"><i class="bi bi-headset"></i></div>
+            <h5>Suporte contínuo</h5>
+            <p>Manutenção preventiva e suporte técnico inclusos no contrato.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="mvv-card reveal">
+            <div class="mvv-icon"><i class="bi bi-arrow-up-right-circle-fill"></i></div>
+            <h5>Fácil de expandir</h5>
+            <p>Precisa de mais câmeras? Ajustamos o plano conforme a necessidade cresce.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="col-lg-6">
-          <div class="card-soft p-4 reveal">
-            <h2 class="fw-bold">Simule seu plano</h2>
-            <p class="text-muted">Preencha e envie direto pro WhatsApp com a mensagem pronta.</p>
+  <!-- PLANOS -->
+  <section class="py-5 section-soft">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <span class="badge-premium mb-2 d-inline-flex">Planos disponíveis</span>
+        <h2 class="fw-bold mb-1">Escolha o plano ideal para o seu negócio</h2>
+        <p class="text-muted mb-0">Todos os planos incluem instalação, suporte e manutenção preventiva.</p>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-6 col-lg-4">
+          <div class="plan-card reveal">
+            <div class="plan-icon">📷</div>
+            <h4 class="fw-bold mb-1">Básico</h4>
+            <p class="text-muted small mb-3">Ideal para pequenos comércios e escritórios.</p>
+            <ul class="text-muted small mb-4">
+              <li>Até 4 câmeras CFTV</li>
+              <li>Gravação local (DVR)</li>
+              <li>Acesso remoto via app</li>
+              <li>Suporte mensal incluso</li>
+            </ul>
+            <a class="btn btn-outline-dark w-100" href="#" id="locacaoWhatsapp">Consultar valor</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="plan-card featured reveal">
+            <div class="plan-icon">🛡️</div>
+            <h4 class="fw-bold mb-1">Profissional</h4>
+            <p class="text-muted small mb-3">Para empresas e condomínios que precisam de mais controle.</p>
+            <ul class="text-muted small mb-4">
+              <li>Até 16 câmeras CFTV</li>
+              <li>Controle de Acesso</li>
+              <li>Alarmes e sensores</li>
+              <li>Manutenção preventiva trimestral</li>
+            </ul>
+            <a class="btn btn-warning w-100" href="#" id="ctaWhatsapp">Consultar valor</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="plan-card reveal">
+            <div class="plan-icon">🏢</div>
+            <h4 class="fw-bold mb-1">Corporativo</h4>
+            <p class="text-muted small mb-3">Para demandas complexas e ambientes de grande porte.</p>
+            <ul class="text-muted small mb-4">
+              <li>Câmeras ilimitadas (conforme projeto)</li>
+              <li>CFTV + Acesso + LPR + Alarmes</li>
+              <li>Portaria virtual opcional</li>
+              <li>Suporte prioritário</li>
+            </ul>
+            <a class="btn btn-outline-dark w-100" href="contato.html">Solicitar proposta</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- SIMULADOR -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-5 reveal">
+          <span class="badge-premium mb-3 d-inline-flex">Rápido e sem compromisso</span>
+          <h2 class="fw-bold mb-3">Simule seu plano de locação</h2>
+          <p class="text-muted">Preencha as informações abaixo e nos envie pelo WhatsApp. Retornamos com uma proposta personalizada.</p>
+          <div class="d-flex flex-column gap-2 mt-3">
+            <div class="contact-channel">
+              <div class="ch-icon green"><i class="bi bi-whatsapp"></i></div>
+              <div>
+                <div class="ch-label">WhatsApp</div>
+                <div class="ch-value">(11) 95911-8648</div>
+              </div>
+            </div>
+            <div class="contact-channel">
+              <div class="ch-icon blue"><i class="bi bi-clock-fill"></i></div>
+              <div>
+                <div class="ch-label">Retorno</div>
+                <div class="ch-value">Em até 1 hora útil</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7 reveal">
+          <div class="card-soft p-4">
             <form id="locacaoForm">
-              <div class="mb-2">
-                <label class="form-label">Nome</label>
-                <input class="form-control" name="nome" required>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Nome</label>
+                  <div class="input-icon-wrap">
+                    <i class="bi bi-person"></i>
+                    <input class="form-control" name="nome" placeholder="Seu nome" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Tipo de local</label>
+                  <div class="input-icon-wrap">
+                    <i class="bi bi-building"></i>
+                    <select class="form-select" name="tipo" required>
+                      <option value="" selected disabled>Selecione</option>
+                      <option>Empresa</option>
+                      <option>Condomínio</option>
+                      <option>Comércio</option>
+                      <option>Indústria</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Qtd. aproximada de câmeras</label>
+                  <div class="input-icon-wrap">
+                    <i class="bi bi-camera-video"></i>
+                    <input class="form-control" name="qtd" placeholder="Ex.: 8 câmeras">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Descreva sua necessidade</label>
+                  <div class="input-icon-wrap">
+                    <i class="bi bi-chat-left-text" style="top:14px;transform:none;"></i>
+                    <textarea class="form-control" name="necessidade" rows="4"
+                      placeholder="Ex.: CFTV externo + Controle de Acesso na entrada principal..."></textarea>
+                  </div>
+                </div>
               </div>
-
-              <div class="mb-2">
-                <label class="form-label">Tipo de local</label>
-                <select class="form-select" name="tipo" required>
-                  <option value="" selected disabled>Selecione</option>
-                  <option>Empresa</option>
-                  <option>Condomínio</option>
-                  <option>Residência</option>
-                  <option>Comércio</option>
-                </select>
-              </div>
-
-              <div class="mb-2">
-                <label class="form-label">Qtd. aproximada de câmeras</label>
-                <input class="form-control" name="qtd" placeholder="Ex.: 8">
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">Necessidade</label>
-                <textarea class="form-control" name="necessidade" rows="4" placeholder="Ex.: CFTV + controle de acesso + LPR"></textarea>
-              </div>
-
-              <button class="btn btn-dark w-100" type="submit">Enviar no WhatsApp</button>
+              <button class="btn btn-warning w-100 mt-3" type="submit">
+                <i class="bi bi-whatsapp me-1"></i>Enviar no WhatsApp
+              </button>
+              <p class="small text-muted text-center mt-2 mb-0">Sem compromisso · Atendimento em horário comercial</p>
             </form>
           </div>
         </div>
-
       </div>
     </div>
-  </main>
+  </section>
 
-  <footer class="py-4 bg-dark text-white">
+  <!-- FOOTER -->
+  <footer class="site-footer">
     <div class="container">
-      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
-        <div class="small">© <span id="ano"></span> Alphasec — Segurança Eletrônica</div>
-        <div class="small text-muted">Santo André - SP • contato@alphasec.com.br</div>
+      <div class="row g-4">
+        <div class="col-lg-4 foot-col">
+          <div class="footer-brand">
+            <img src="img/Alphasec.png" alt="Alphasec" class="footer-logo" />
+            <p>Soluções profissionais em segurança eletrônica para empresas, condomínios e indústrias em Santo André e região.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-2 foot-col">
+          <div class="footer-heading">Navegação</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="quem-somos.html">Quem Somos</a></li>
+            <li><a href="servicos.html">Serviços</a></li>
+            <li><a href="locacao.html">Locação</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-3 foot-col">
+          <div class="footer-heading">Serviços</div>
+          <ul class="footer-links">
+            <li><a href="servicos.html#cftv">CFTV</a></li>
+            <li><a href="servicos.html#acesso">Controle de Acesso</a></li>
+            <li><a href="servicos.html#lpr">LPR</a></li>
+            <li><a href="servicos.html#portaria">Portaria Virtual</a></li>
+            <li><a href="servicos.html#alarmes">Alarmes</a></li>
+            <li><a href="servicos.html#manutencao">Manutenção</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-3 foot-col footer-contact">
+          <div class="footer-heading">Contato</div>
+          <a href="tel:+5511959118648"><i class="bi bi-telephone-fill"></i>(11) 95911-8648</a>
+          <a href="mailto:contato@alphasec.com.br"><i class="bi bi-envelope-fill"></i>contato@alphasec.com.br</a>
+          <a href="https://wa.me/5511959118648" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i>WhatsApp</a>
+          <a href="#"><i class="bi bi-geo-alt-fill"></i>Santo André - SP</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <div class="small text-muted">© <span id="ano"></span> Alphasec — Segurança Eletrônica. Todos os direitos reservados.</div>
+        <div class="small">Criado por <a href="https://www.systexforge.com.br" target="_blank" rel="noopener noreferrer">www.systexforge.com.br</a></div>
       </div>
     </div>
   </footer>
 
-  <a class="to-top" id="toTop" href="javascript:void(0)" aria-label="Voltar ao topo">↑</a>
+  <a class="to-top" id="toTop" href="javascript:void(0)" aria-label="Voltar ao topo"><i class="bi bi-arrow-up"></i></a>
   <a class="whatsapp-float" href="#" id="floatWhatsapp" aria-label="Falar no WhatsApp">
     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48" fill="#fff" aria-hidden="true">
       <path d="M24 4C13 4 4 13 4 24c0 3.6 1 7 2.7 10L4 44l10.3-2.7c2.9 1.5 6.2 2.4 9.7 2.4 11 0 20-9 20-20S35 4 24 4zm0 36.5c-3.1 0-6-.8-8.5-2.3l-.6-.4-6.1 1.6 1.6-5.9-.4-.6C8.8 30.3 8 27.2 8 24 8 15.2 15.2 8 24 8s16 7.2 16 16-7.2 16.5-16 16.5zm8.8-12.3c-.5-.2-2.8-1.4-3.2-1.5-.4-.2-.7-.2-1 .2s-1.2 1.5-1.4 1.8c-.3.3-.5.4-1 .1-.5-.2-2-.7-3.8-2.3-1.4-1.2-2.3-2.8-2.6-3.2-.3-.5 0-.7.2-1 .2-.2.5-.5.7-.8.2-.3.3-.5.4-.8.1-.3.1-.6 0-.8-.1-.2-1-2.4-1.3-3.3-.4-.9-.7-.8-1-.8h-.9c-.3 0-.8.1-1.2.6-.4.5-1.6 1.6-1.6 3.8s1.7 4.4 1.9 4.7c.2.3 3.3 5 8 7 1.1.5 2 .8 2.7 1 1.1.3 2.1.3 2.9.2.9-.1 2.8-1.1 3.2-2.2.4-1.1.4-2 .3-2.2-.2-.3-.5-.4-1-.6z"/>
