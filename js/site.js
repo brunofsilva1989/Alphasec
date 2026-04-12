@@ -183,6 +183,7 @@
   if (contatoForm) {
     contatoForm.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const startedAt = Date.now();
       const btn = document.getElementById("btnEnviar");
       const feedback = document.getElementById("formFeedback");
       btn.disabled = true;
@@ -190,23 +191,55 @@
       feedback.className = "mt-3 d-none alert";
       feedback.textContent = "";
       try {
+        console.groupCollapsed("[Contato] Envio iniciado");
+        console.log("Endpoint:", "enviar-contato.php");
+
         const res = await fetch("enviar-contato.php", {
           method: "POST",
           body: new FormData(contatoForm),
         });
-        const data = await res.json();
+
+        const raw = await res.text();
+        let data;
+        try {
+          data = JSON.parse(raw);
+        } catch {
+          data = {
+            sucesso: false,
+            mensagem: raw && raw.trim()
+              ? `Falha no envio: ${raw.trim().slice(0, 220)}`
+              : "Erro ao processar o envio no servidor.",
+          };
+        }
+
+        console.log("HTTP status:", res.status, res.statusText);
+        console.log("Resposta bruta:", raw);
+        console.log("Resposta parseada:", data);
+        if (data.request_id) {
+          console.log("Request ID:", data.request_id);
+        }
+        if (data.debug) {
+          console.log("Debug PHP:", data.debug);
+        }
+        console.log("Tempo total (ms):", Date.now() - startedAt);
+        console.groupEnd();
+
         feedback.textContent = data.mensagem;
         feedback.classList.remove("d-none");
-        if (data.sucesso) {
+        if (res.ok && data.sucesso) {
           feedback.classList.add("alert-success");
           contatoForm.reset();
         } else {
           feedback.classList.add("alert-danger");
         }
       } catch {
+        console.groupCollapsed("[Contato] Erro de rede no envio");
+        console.error("Falha ao chamar enviar-contato.php");
+        console.log("Tempo até erro (ms):", Date.now() - startedAt);
+        console.groupEnd();
         feedback.classList.remove("d-none");
         feedback.classList.add("alert-danger");
-        feedback.textContent = "Erro de conexão. Tente novamente ou fale pelo WhatsApp.";
+        feedback.textContent = "Erro de conexão. Tente novamente em alguns instantes.";
       } finally {
         btn.disabled = false;
         btn.textContent = "Enviar mensagem";
