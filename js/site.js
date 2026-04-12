@@ -39,10 +39,44 @@
     if (id === "locacaoWhatsapp") {
       msg = `Olá! Vim pelo site da Alphasec. Quero informações sobre locação.\n\nCidade: ${CIDADE}`;
     }
-    el.setAttribute("href", waLink(msg));
-    el.setAttribute("target", "_blank");
-    el.setAttribute("rel", "noopener noreferrer");
+    if (id !== "ctaWhatsapp") {
+      el.setAttribute("href", waLink(msg));
+      el.setAttribute("target", "_blank");
+      el.setAttribute("rel", "noopener noreferrer");
+    }
   });
+
+  // CTA do hero — mensagem dinâmica conforme os selects
+  const ctaWhatsapp = document.getElementById("ctaWhatsapp");
+  if (ctaWhatsapp) {
+    function updateCtaLink() {
+      const ambiente = document.getElementById("selectAmbiente");
+      const solucao  = document.getElementById("selectSolucao");
+      const ambienteVal = (ambiente && ambiente.value) ? ambiente.value : null;
+      const solucaoVal  = (solucao  && solucao.value)  ? solucao.value  : null;
+
+      let msg;
+      if (ambienteVal && solucaoVal) {
+        msg = `Olá! Vim pelo site da Alphasec. Quero um orçamento para um ambiente ${ambienteVal}, com ${solucaoVal}.`;
+      } else if (ambienteVal) {
+        msg = `Olá! Vim pelo site da Alphasec. Quero um orçamento para um ambiente ${ambienteVal}.`;
+      } else if (solucaoVal) {
+        msg = `Olá! Vim pelo site da Alphasec. Quero um orçamento com a solução ${solucaoVal}.`;
+      } else {
+        msg = defaultMsg;
+      }
+
+      ctaWhatsapp.setAttribute("href", waLink(msg));
+      ctaWhatsapp.setAttribute("target", "_blank");
+      ctaWhatsapp.setAttribute("rel", "noopener noreferrer");
+    }
+
+    const selAmbiente = document.getElementById("selectAmbiente");
+    const selSolucao  = document.getElementById("selectSolucao");
+    if (selAmbiente) selAmbiente.addEventListener("change", updateCtaLink);
+    if (selSolucao)  selSolucao.addEventListener("change", updateCtaLink);
+    updateCtaLink();
+  }
 
   // -------------------------
   // HERO SLIDER
