@@ -237,6 +237,29 @@ img { max-width: 100%; height: auto; }
 .service-card-body h5 { font-weight: 700; margin-bottom: .5rem; }
 .service-card-body p { color: var(--muted); flex: 1; font-size: .93rem; margin-bottom: 1rem; }
 .service-card-body .btn { margin-top: auto; align-self: flex-start; }
+.service-certifications {
+  display: flex;
+  justify-content: center;
+  margin-top: -.5rem;
+  margin-bottom: 1.25rem;
+}
+.service-certifications-inner {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.35rem;
+  padding: 1.15rem 1.6rem;
+  border-radius: 24px;
+  background: #fff;
+  border: 1px solid rgba(15,23,42,.08);
+  box-shadow: 0 16px 40px rgba(2,6,23,.08);
+}
+.service-certifications-inner img {
+  display: block;
+  max-height: 120px;
+  width: auto;
+}
 
 /* Icon bubble (mini cards) */
 .icon-bubble {
@@ -372,6 +395,27 @@ img { max-width: 100%; height: auto; }
 .input-icon-wrap textarea ~ .bi { top: 14px; transform: none; }
 .input-icon-wrap .form-control,
 .input-icon-wrap .form-select { padding-left: 2.65rem; }
+.hero-certification {
+  margin-top: .8rem;
+  padding: .65rem .9rem;
+  border-radius: 14px;
+  background: rgba(248,250,252,.9);
+  border: 1px solid rgba(15,23,42,.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-certification img {
+  display: block;
+  max-height: 180px;
+  width: auto;
+}
+.hero-certification-block {
+  margin-top: 1rem;
+}
+.hero-certification-block {
+  margin-top: 1rem;
+}
 
 /* ============================================================
    CANAIS DE CONTATO
@@ -429,6 +473,29 @@ footer.site-footer {
 }
 .footer-brand .footer-logo { height: 48px; width: auto; }
 .footer-brand p { color: rgba(255,255,255,.60); font-size: .88rem; margin-top: .75rem; max-width: 260px; line-height: 1.6; }
+.footer-certifications {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .85rem;
+  margin-top: 1.25rem;
+}
+.footer-cert-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 58px;
+  padding: .6rem .9rem;
+  border-radius: 16px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 12px 30px rgba(2,6,23,.18);
+}
+.footer-cert-badge img {
+  display: block;
+  max-height: 42px;
+  width: auto;
+}
 .footer-heading {
   font-size: .76rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: .08em;
