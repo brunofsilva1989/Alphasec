@@ -478,25 +478,49 @@ footer.site-footer {
   color: #fff;
   padding: 4rem 0 0;
 }
+.footer-brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .9rem;
+}
 .footer-brand .footer-logo { height: 48px; width: auto; }
-.footer-brand p { color: rgba(255,255,255,.60); font-size: .88rem; margin-top: .75rem; max-width: 260px; line-height: 1.6; }
+.footer-brand > .footer-cert-badge {
+  min-height: 0;
+  padding: 0;
+}
+.footer-brand > .footer-cert-badge img {
+  height: 48px;
+  max-height: none;
+  width: auto;
+}
+.footer-brand p {
+  color: rgba(255,255,255,.60);
+  font-size: .88rem;
+  margin-top: .1rem;
+  margin-bottom: 0;
+  max-width: 260px;
+  line-height: 1.6;
+  flex-basis: 100%;
+}
 .footer-certifications {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: .85rem;
   margin-top: 1.25rem;
+  flex-basis: 100%;
 }
 .footer-cert-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 58px;
-  padding: .6rem .9rem;
-  border-radius: 16px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.12);
-  box-shadow: 0 12px 30px rgba(2,6,23,.18);
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 .footer-cert-badge img {
   display: block;
