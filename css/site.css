@@ -68,7 +68,19 @@ img {
    NAVBAR
    ============================================================ */
 .navbar { transition: box-shadow var(--transition); }
-.navbar-brand img { height: 62px !important; width: auto !important; }
+.navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+}
+.navbar-brand .navbar-logo {
+  height: 62px !important;
+  width: auto !important;
+}
+.navbar-brand .navbar-anniversary {
+  height: 62px;
+  width: auto;
+}
 .navbar.bg-white { box-shadow: 0 4px 24px rgba(2,6,23,.08); }
 .navbar-light .navbar-nav .nav-link {
   color: rgba(15,23,42,.78);
@@ -647,6 +659,10 @@ footer:not(.site-footer) { background: var(--navy); color: #fff; }
   .hero-indicators { bottom: 18px; }
   .service-card-img { height: 175px; }
   .split-media { border-radius: 14px; }
+  .navbar-brand .navbar-logo,
+  .navbar-brand .navbar-anniversary {
+    height: 48px !important;
+  }
 }
 @media (max-width: 576px) {
   .hero h1 { font-size: 1.85rem; }
