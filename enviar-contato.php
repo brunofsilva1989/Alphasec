@@ -255,6 +255,7 @@ appLog($REQUEST_ID, 'inicio_requisicao', [
 // Lê e valida os campos
 $nome     = limpar($_POST['nome']     ?? '');
 $email    = limpar($_POST['email']    ?? '');
+$telefone = limpar($_POST['telefone'] ?? '');
 $assunto  = limpar($_POST['assunto']  ?? '');
 $mensagem = limpar($_POST['mensagem'] ?? '');
 
@@ -293,6 +294,7 @@ $corpo = '<!doctype html>'
     . '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;font-size:14px;">'
     . '<tr><td style="padding:8px 0;width:110px;color:#64748b;">Nome</td><td style="padding:8px 0;font-weight:600;">' . $nome . '</td></tr>'
     . '<tr><td style="padding:8px 0;width:110px;color:#64748b;">E-mail</td><td style="padding:8px 0;"><a href="mailto:' . $email . '" style="color:#1565c0;text-decoration:none;">' . $email . '</a></td></tr>'
+    . ($telefone !== '' ? '<tr><td style="padding:8px 0;width:110px;color:#64748b;">Telefone</td><td style="padding:8px 0;"><a href="tel:' . preg_replace('/[^+\d]/', '', $telefone) . '" style="color:#1565c0;text-decoration:none;">' . $telefone . '</a></td></tr>' : '')
     . '<tr><td style="padding:8px 0;width:110px;color:#64748b;">Assunto</td><td style="padding:8px 0;">' . $assunto . '</td></tr>'
     . '<tr><td style="padding:8px 0;width:110px;color:#64748b;">Enviado em</td><td style="padding:8px 0;">' . $dataEnvio . '</td></tr>'
     . '</table>'
