@@ -14,7 +14,7 @@
   // =========================
   const WHATSAPP_NUMBER = "5511959118648";
   const EMAIL = "contato@alphasec.com.br";
-  const CIDADE = "Santo André - SP";
+  const CIDADE = "Atendimento Nacional";
 
   function waLink(message) {
     const text = encodeURIComponent(message);
