@@ -587,7 +587,7 @@ footer.site-footer {
 }
 .footer-cert-badge img {
   display: block;
-  max-height: 42px;
+  max-height: 100px;
   width: auto;
 }
 .footer-heading {
