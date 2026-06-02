@@ -1,0 +1,165 @@
+<!-- ══════════════════════════════════════════════════════════════
+     SEÇÃO BLOG — Inserir APÓS a seção "Nosso Processo" no index.html
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="blog-home py-5">
+  <div class="container">
+
+    <!-- Cabeçalho da seção -->
+    <div class="row align-items-end mb-4">
+      <div class="col-md-8">
+        <span class="text-warning fw-bold text-uppercase small letter-spacing-1">
+          <i class="bi bi-journal-richtext me-1"></i>Blog
+        </span>
+        <h2 class="fw-bold mt-1 mb-2" style="font-size:clamp(1.6rem,3vw,2.2rem)">
+          Fique por dentro das novidades
+        </h2>
+        <p class="text-muted mb-0" style="max-width:520px">
+          Artigos sobre segurança eletrônica, CFTV, controle de acesso e proteção
+          do seu patrimônio escritos pelos especialistas da Alphasec.
+        </p>
+      </div>
+      <div class="col-md-4 text-md-end mt-3 mt-md-0">
+        <a href="blog/index.html" class="btn btn-outline-dark px-4 fw-semibold">
+          Ver todos os artigos <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Cards dos últimos 3 posts (carregados via JS) -->
+    <div class="row g-4" id="blog-home-cards">
+      <!-- Loading skeleton -->
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100" style="border-radius:12px;overflow:hidden">
+          <div style="height:180px;background:#eee;animation:pulse 1.5s infinite"></div>
+          <div class="card-body"><div style="height:14px;background:#eee;border-radius:4px;margin-bottom:8px"></div><div style="height:14px;background:#eee;border-radius:4px;width:70%"></div></div>
+        </div>
+      </div>
+      <div class="col-md-4 d-none d-md-block">
+        <div class="card border-0 shadow-sm h-100" style="border-radius:12px;overflow:hidden">
+          <div style="height:180px;background:#eee;animation:pulse 1.5s infinite"></div>
+          <div class="card-body"><div style="height:14px;background:#eee;border-radius:4px;margin-bottom:8px"></div><div style="height:14px;background:#eee;border-radius:4px;width:70%"></div></div>
+        </div>
+      </div>
+      <div class="col-md-4 d-none d-md-block">
+        <div class="card border-0 shadow-sm h-100" style="border-radius:12px;overflow:hidden">
+          <div style="height:180px;background:#eee;animation:pulse 1.5s infinite"></div>
+          <div class="card-body"><div style="height:14px;background:#eee;border-radius:4px;margin-bottom:8px"></div><div style="height:14px;background:#eee;border-radius:4px;width:70%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA final -->
+    <div class="text-center mt-5">
+      <a href="blog/index.html"
+         class="btn btn-warning btn-lg px-5 fw-bold"
+         style="border-radius:6px;color:#111">
+        <i class="bi bi-journals me-2"></i>Ver todos os artigos
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────────────
+     CSS para a seção (adicionar em css/site.css ou no <style> do index)
+     ────────────────────────────────────────────────────────────── -->
+<style>
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+.blog-home { background: #f8f9fa; }
+
+.blog-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  transition: transform .25s, box-shadow .25s;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.12);
+  color: inherit;
+}
+.blog-card img {
+  height: 190px;
+  width: 100%;
+  object-fit: cover;
+}
+.blog-card .corpo {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+.blog-card .cat-tag {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #d4a800;
+  background: rgba(245,200,0,.12);
+  padding: 3px 10px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.blog-card h3 {
+  font-size: .97rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  color: #111;
+  flex: 1;
+}
+.blog-card .leia {
+  font-size: .82rem;
+  font-weight: 700;
+  color: #f5c800;
+  margin-top: 12px;
+}
+.blog-card .leia i { transition: transform .2s; }
+.blog-card:hover .leia i { transform: translateX(4px); }
+</style>
+
+<!-- ──────────────────────────────────────────────────────────────
+     JS para a seção (adicionar em js/site.js ou antes do </body>)
+     ────────────────────────────────────────────────────────────── -->
+<script>
+(function() {
+  async function carregarBlogHome() {
+    const container = document.getElementById('blog-home-cards');
+    if (!container) return;
+    try {
+      const res = await fetch('blog/posts/posts.json?' + Date.now());
+      const posts = await res.json();
+      const ultimos = posts.sort((a,b) => new Date(b.data) - new Date(a.data)).slice(0,3);
+      container.innerHTML = ultimos.map(p => `
+        <div class="col-md-4">
+          <a class="blog-card" href="blog/post.html?id=${p.id}">
+            <img src="${p.imagem}" alt="${p.titulo}" loading="lazy" />
+            <div class="corpo">
+              <span class="cat-tag">${p.categoria}</span>
+              <h3>${p.titulo}</h3>
+              <span class="leia">Leia mais <i class="bi bi-arrow-right"></i></span>
+            </div>
+          </a>
+        </div>`).join('');
+    } catch(e) {
+      // Se o JSON não existir ainda, esconde a seção silenciosamente
+      const secao = container.closest('.blog-home');
+      if (secao) secao.style.display = 'none';
+    }
+  }
+  carregarBlogHome();
+})();
+</script>

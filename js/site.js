@@ -265,6 +265,42 @@
   if (btnRecusar) btnRecusar.addEventListener("click", () => { setConsent("declined"); banner.classList.remove("show"); });
 
   // -------------------------
+  // Blog home
+  // -------------------------
+  async function carregarBlogHome() {
+    const container = document.getElementById("blog-home-cards");
+    if (!container) return;
+
+    try {
+      const res = await fetch(`blog/posts/posts.json?${Date.now()}`);
+      if (!res.ok) throw new Error("Falha ao carregar posts");
+
+      const posts = await res.json();
+      const ultimos = posts
+        .sort((a, b) => new Date(b.data) - new Date(a.data))
+        .slice(0, 3);
+
+      if (!ultimos.length) throw new Error("Sem posts");
+
+      container.innerHTML = ultimos.map((p) => `
+        <div class="col-md-4">
+          <a class="blog-card" href="blog/post.html?id=${p.id}">
+            <img src="${p.imagem}" alt="${p.titulo}" loading="lazy" />
+            <div class="corpo">
+              <span class="cat-tag">${p.categoria}</span>
+              <h3>${p.titulo}</h3>
+              <span class="leia">Leia mais <i class="bi bi-arrow-right"></i></span>
+            </div>
+          </a>
+        </div>`).join("");
+    } catch {
+      const secao = container.closest(".blog-home");
+      if (secao) secao.style.display = "none";
+    }
+  }
+  carregarBlogHome();
+
+  // -------------------------
   // E-mail helpers
   // -------------------------
   document.querySelectorAll("a[data-email]").forEach((a) => {

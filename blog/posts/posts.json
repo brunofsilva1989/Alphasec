@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "titulo": "Sistema de CFTV: o que você precisa saber antes de contratar",
+    "slug": "sistema-cftv-o-que-voce-precisa-saber",
+    "resumo": "O CFTV moderno vai muito além de câmeras. Entenda as diferenças entre sistemas analógicos e IP, resolução, armazenamento e como escolher o ideal para o seu negócio.",
+    "conteudo": "<p>O CFTV (Circuito Fechado de Televisão) é hoje uma das ferramentas mais eficazes para a segurança de empresas, condomínios e estabelecimentos comerciais. Mas antes de contratar, é essencial entender os tipos de sistema disponíveis no mercado.</p><h3>Câmeras IP vs. Analógicas</h3><p>As câmeras IP oferecem resolução superior, transmissão via rede e integração com sistemas de análise de vídeo. As analógicas, por sua vez, têm custo menor e são ideais para retrofitting em instalações já existentes.</p><h3>Resolução e Armazenamento</h3><p>Hoje o padrão mínimo recomendado é Full HD (1080p). Para áreas críticas como caixas e entradas, considere câmeras 4K. O armazenamento pode ser feito em DVR, NVR ou na nuvem.</p><p>Entre em contato com a Alphasec para um diagnóstico gratuito do seu ambiente.</p>",
+    "imagem": "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=800&q=80",
+    "categoria": "CFTV",
+    "autor": "Equipe Alphasec",
+    "data": "2025-05-20",
+    "destaque": true
+  },
+  {
+    "id": "2",
+    "titulo": "Controle de Acesso: tecnologias e quando usar cada uma",
+    "slug": "controle-acesso-tecnologias",
+    "resumo": "Biometria, cartão RFID ou reconhecimento facial? Saiba qual tecnologia de controle de acesso é mais adequada para cada tipo de ambiente e porte de empresa.",
+    "conteudo": "<p>O controle de acesso evoluiu muito nos últimos anos. Hoje é possível gerenciar quem entra e sai de um ambiente de forma precisa, auditável e integrada com outros sistemas de segurança.</p><h3>Biometria Digital</h3><p>Ideal para empresas com até 500 colaboradores. Custo acessível e alta confiabilidade. Elimina o risco de cartões perdidos ou emprestados.</p><h3>Reconhecimento Facial</h3><p>A tecnologia mais moderna. Sem contato, alta velocidade de autenticação e integração com câmeras de CFTV. Recomendada para ambientes corporativos e condomínios de alto padrão.</p><h3>RFID (Cartão/Crachá)</h3><p>Solução versátil e econômica para controle de visitantes, estacionamentos e áreas de acesso temporário.</p>",
+    "imagem": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    "categoria": "Controle de Acesso",
+    "autor": "Equipe Alphasec",
+    "data": "2025-05-10",
+    "destaque": false
+  },
+  {
+    "id": "3",
+    "titulo": "Por que a locação de equipamentos de segurança é vantajosa para empresas",
+    "slug": "locacao-equipamentos-seguranca-vantagens",
+    "resumo": "Investir em segurança sem comprometer o capital de giro da empresa é possível. Conheça as vantagens do modelo de locação de equipamentos de segurança eletrônica.",
+    "conteudo": "<p>Muitas empresas adiavam a implementação de sistemas de segurança por causa do alto investimento inicial. O modelo de locação mudou esse cenário completamente.</p><h3>Vantagens da Locação</h3><ul><li><strong>Sem investimento inicial alto:</strong> pagamento mensal previsível no orçamento</li><li><strong>Equipamentos sempre atualizados:</strong> a tecnologia evolui e você acompanha</li><li><strong>Manutenção incluída:</strong> sem custos surpresa</li><li><strong>Escalabilidade:</strong> expanda o sistema conforme sua empresa cresce</li></ul><h3>Para quem é indicado?</h3><p>Startups, franquias em expansão, empresas que preferem manter o CAPEX baixo e negócios com múltiplas unidades se beneficiam mais deste modelo.</p>",
+    "imagem": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80",
+    "categoria": "Locação",
+    "autor": "Equipe Alphasec",
+    "data": "2025-04-28",
+    "destaque": false
+  }
+]
