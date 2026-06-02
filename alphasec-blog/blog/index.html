@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blog | Alphasec – Segurança Eletrônica</title>
   <meta name="description" content="Artigos, dicas e novidades sobre segurança eletrônica, CFTV, controle de acesso e mais. Blog da Alphasec." />
-  <link rel="canonical" href="https://alphasec.com.br/blog/" />
+  <link rel="canonical" href="https://seusite.com.br/blog/" />
 
   <!-- Bootstrap 5.3 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
@@ -15,22 +15,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- CSS do site -->
-  <link rel="stylesheet" href="../css/site.css" />
+  <link rel="stylesheet" href="../../css/site.css" />
 
   <style>
-    :root {
-      --alpha-preto: #0a0a0a;
-      --alpha-amarelo: #f5c800;
-      --alpha-cinza: #f4f4f4;
-      --alpha-texto: #222;
-    }
-
-    body { font-family: 'Inter', sans-serif; color: var(--alpha-texto); }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: #fff; }
 
     /* ── Hero do Blog ── */
     .blog-hero {
-      background: var(--alpha-preto);
-      padding: 80px 0 60px;
+      background:
+        linear-gradient(105deg, rgba(10,22,40,.96), rgba(10,22,40,.86)),
+        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80') center/cover;
+      padding: 88px 0 68px;
       position: relative;
       overflow: hidden;
     }
@@ -39,14 +34,14 @@
       position: absolute;
       top: -60px; right: -80px;
       width: 380px; height: 380px;
-      background: var(--alpha-amarelo);
-      opacity: .07;
+      background: var(--yellow);
+      opacity: .08;
       border-radius: 50%;
     }
     .blog-hero .tag-label {
       display: inline-block;
-      background: var(--alpha-amarelo);
-      color: var(--alpha-preto);
+      background: var(--yellow);
+      color: var(--navy);
       font-size: .72rem;
       font-weight: 700;
       letter-spacing: .12em;
@@ -62,8 +57,8 @@
       line-height: 1.15;
       margin-bottom: 16px;
     }
-    .blog-hero h1 span { color: var(--alpha-amarelo); }
-    .blog-hero p { color: #aaa; font-size: 1.05rem; max-width: 560px; }
+    .blog-hero h1 span { color: var(--yellow); }
+    .blog-hero p { color: rgba(255,255,255,.76); font-size: 1.05rem; max-width: 560px; }
 
     /* ── Filtros de categoria ── */
     .filtros { padding: 36px 0 10px; }
@@ -79,9 +74,9 @@
       cursor: pointer;
     }
     .btn-filtro:hover, .btn-filtro.ativo {
-      border-color: var(--alpha-amarelo);
-      background: var(--alpha-amarelo);
-      color: var(--alpha-preto);
+      border-color: var(--yellow);
+      background: var(--yellow);
+      color: var(--navy);
     }
 
     /* ── Grid de Posts ── */
@@ -89,7 +84,7 @@
 
     .card-post {
       border: none;
-      border-radius: 12px;
+      border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 2px 12px rgba(0,0,0,.08);
       transition: transform .25s, box-shadow .25s;
@@ -121,7 +116,7 @@
       font-weight: 700;
       letter-spacing: .08em;
       text-transform: uppercase;
-      color: var(--alpha-amarelo);
+      color: var(--yellow);
       background: rgba(245,200,0,.12);
       padding: 3px 10px;
       border-radius: 3px;
@@ -132,7 +127,7 @@
       font-weight: 700;
       line-height: 1.4;
       margin-bottom: 10px;
-      color: var(--alpha-preto);
+      color: var(--navy);
     }
     .card-post .resumo {
       font-size: .88rem;
@@ -152,7 +147,7 @@
     .card-post .leia-mais {
       font-size: .82rem;
       font-weight: 700;
-      color: var(--alpha-amarelo);
+      color: var(--yellow);
       text-decoration: none;
     }
     .card-post .leia-mais i { transition: transform .2s; }
@@ -173,7 +168,7 @@
 
     /* ── CTA WhatsApp ── */
     .cta-blog {
-      background: var(--alpha-preto);
+      background: var(--navy);
       padding: 60px 0;
       text-align: center;
     }
@@ -196,25 +191,43 @@
 </head>
 <body>
 
-  <!-- ══ NAVBAR (copie a navbar do seu site aqui) ══ -->
-  <!-- Substitua pelo include/componente da sua navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="../index.html">
-        <span style="color:var(--alpha-amarelo,#f5c800)">⬡</span> ALPHASEC
+  <!-- TOPBAR -->
+  <div class="topbar py-2 d-none d-lg-block">
+    <div class="container d-flex justify-content-between align-items-center small">
+      <div class="text-muted d-flex align-items-center gap-3 flex-wrap">
+        <span><i class="bi bi-geo-alt-fill me-1"></i>Atendimento Nacional</span>
+        <span><i class="bi bi-telephone-fill me-1"></i>(11) 95911-8648</span>
+        <span><i class="bi bi-envelope-fill me-1"></i><a class="link-muted" href="mailto:contato@alphasec.com.br">contato@alphasec.com.br</a></span>
+      </div>
+      <a class="btn btn-sm btn-warning" href="#" id="topbarWhatsapp">
+        <i class="bi bi-whatsapp me-1"></i>WhatsApp
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="../../index.html">
+        <img src="../../img/Logo Alphasec 2025.png" alt="Alphasec" class="navbar-logo" />
+        <img src="../../img/servicos/13anos.png" alt="13 anos de certificação" class="navbar-anniversary" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navMain">
-        <ul class="navbar-nav ms-auto gap-1">
-          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="../quem-somos.html">Quem Somos</a></li>
-          <li class="nav-item"><a class="nav-link" href="../servicos.html">Serviços</a></li>
-          <li class="nav-item"><a class="nav-link" href="../locacao.html">Locação</a></li>
+      <div id="menu" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../quem-somos.html">Quem Somos</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../servicos.html">Serviços</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../locacao.html">Locação</a></li>
           <li class="nav-item"><a class="nav-link active" href="index.html">Blog</a></li>
-          <li class="nav-item"><a class="nav-link" href="../contato.html">Contato</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../contato.html">Contato</a></li>
         </ul>
+        <div class="ms-lg-3 d-grid d-lg-flex gap-2 mt-3 mt-lg-0">
+          <a class="btn btn-outline-dark" href="../../contato.html">Solicitar Orçamento</a>
+          <a class="btn btn-warning" href="#" id="navWhatsapp"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>
+        </div>
       </div>
     </div>
   </nav>
@@ -258,22 +271,81 @@
     <div class="container">
       <h3>Precisa de uma solução de segurança?</h3>
       <p>Fale agora com um especialista Alphasec. Diagnóstico gratuito.</p>
-      <a href="https://wa.me/5511959118648?text=Olá!%20Vi%20o%20blog%20da%20Alphasec%20e%20quero%20um%20diagnóstico%20gratuito."
-         target="_blank" class="btn-wpp">
+      <a href="#" id="ctaWhatsapp2" class="btn-wpp">
         <i class="bi bi-whatsapp fs-5"></i> Falar no WhatsApp
       </a>
     </div>
   </section>
 
-  <!-- Footer (copie o footer do seu site) -->
-  <footer class="bg-dark text-white py-4 text-center">
+  <footer class="site-footer">
     <div class="container">
-      <small class="text-muted">© 2025 Alphasec – Segurança Eletrônica. Todos os direitos reservados.</small>
+      <div class="row g-4">
+        <div class="col-lg-4 foot-col">
+          <div class="footer-brand">
+            <img src="../../img/LogoBranco.png" alt="Alphasec" class="footer-logo" />
+            <div class="footer-cert-badge">
+              <img src="../../img/servicos/13anos.png" alt="13 anos de certificação">
+            </div>
+            <p>Soluções profissionais em segurança eletrônica para empresas, condomínios e indústrias com atendimento nacional.</p>
+            <div class="footer-certifications">
+              <div class="footer-cert-badge">
+                <img src="../../img/servicos/digiforte.png" alt="Certificação Digiforte">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-2 foot-col">
+          <div class="footer-heading">Navegação</div>
+          <ul class="footer-links">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../../quem-somos.html">Quem Somos</a></li>
+            <li><a href="../../servicos.html">Serviços</a></li>
+            <li><a href="../../locacao.html">Locação</a></li>
+            <li><a href="index.html">Blog</a></li>
+            <li><a href="../../contato.html">Contato</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-3 foot-col foot-col-services">
+          <div class="footer-heading">Serviços</div>
+          <ul class="footer-links">
+            <li><a href="../../servicos.html#cftv">CFTV</a></li>
+            <li><a href="../../servicos.html#acesso">Controle de Acesso</a></li>
+            <li><a href="../../servicos.html#infraestrutura">Infraestrutura</a></li>
+            <li><a href="../../servicos.html#lpr">LPR</a></li>
+            <li><a href="../../servicos.html#locacao-equipamentos">Locação de Equipamentos</a></li>
+            <li><a href="../../servicos.html#manutencao">Manutenção</a></li>
+            <li><a href="../../servicos.html#monitoramento">Monitoramento</a></li>
+            <li><a href="../../servicos.html#projetos">Projetos</a></li>
+            <li><a href="../../servicos.html#video-analitico">Video Analitico</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-3 foot-col footer-contact">
+          <div class="footer-heading">Contato</div>
+          <a href="tel:+5511959118648"><i class="bi bi-telephone-fill"></i>(11) 95911-8648</a>
+          <a href="mailto:contato@alphasec.com.br"><i class="bi bi-envelope-fill"></i>contato@alphasec.com.br</a>
+          <a href="https://wa.me/5511959118648" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i>WhatsApp</a>
+          <a href="#"><i class="bi bi-geo-alt-fill"></i>Atendimento Nacional</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <div class="small text-muted">© <span id="ano"></span> Alphasec — Segurança Eletrônica. Todos os direitos reservados.</div>
+        <div class="small">Criado por <a href="https://www.systexforge.com.br" target="_blank" rel="noopener noreferrer">www.systexforge.com.br</a></div>
+      </div>
     </div>
   </footer>
 
+  <a class="to-top" id="toTop" href="javascript:void(0)" aria-label="Voltar ao topo"><i class="bi bi-arrow-up"></i></a>
+  <a class="whatsapp-float" href="#" id="floatWhatsapp" aria-label="Falar no WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48" fill="#fff" aria-hidden="true">
+      <path d="M24 4C13 4 4 13 4 24c0 3.6 1 7 2.7 10L4 44l10.3-2.7c2.9 1.5 6.2 2.4 9.7 2.4 11 0 20-9 20-20S35 4 24 4zm0 36.5c-3.1 0-6-.8-8.5-2.3l-.6-.4-6.1 1.6 1.6-5.9-.4-.6C8.8 30.3 8 27.2 8 24 8 15.2 15.2 8 24 8s16 7.2 16 16-7.2 16.5-16 16.5zm8.8-12.3c-.5-.2-2.8-1.4-3.2-1.5-.4-.2-.7-.2-1 .2s-1.2 1.5-1.4 1.8c-.3.3-.5.4-1 .1-.5-.2-2-.7-3.8-2.3-1.4-1.2-2.3-2.8-2.6-3.2-.3-.5 0-.7.2-1 .2-.2.5-.5.7-.8.2-.3.3-.5.4-.8.1-.3.1-.6 0-.8-.1-.2-1-2.4-1.3-3.3-.4-.9-.7-.8-1-.8h-.9c-.3 0-.8.1-1.2.6-.4.5-1.6 1.6-1.6 3.8s1.7 4.4 1.9 4.7c.2.3 3.3 5 8 7 1.1.5 2 .8 2.7 1 1.1.3 2.1.3 2.9.2.9-.1 2.8-1.1 3.2-2.2.4-1.1.4-2 .3-2.2-.2-.3-.5-.4-1-.6z"/>
+    </svg>
+  </a>
+
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/site.js"></script>
 
   <script>
     /* ══ Formatação de data ══ */

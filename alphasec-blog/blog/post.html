@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="meta-title">Artigo | Blog Alphasec</title>
+  <meta name="description" id="meta-desc" content="" />
+
+  <!-- Bootstrap 5.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/site.css" />
+
+  <style>
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: #fff; }
+
+    /* ── Hero do Post ── */
+    .post-hero {
+      background:
+        linear-gradient(105deg, rgba(10,22,40,.96), rgba(10,22,40,.86)),
+        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80') center/cover;
+      padding: 70px 0 50px;
+      position: relative;
+    }
+    .post-hero .breadcrumb { margin-bottom: 20px; }
+    .post-hero .breadcrumb-item a { color: var(--yellow); text-decoration: none; font-size: .85rem; }
+    .post-hero .breadcrumb-item.active { color: #aaa; font-size: .85rem; }
+    .post-hero .breadcrumb-divider { color: #555; }
+    .post-hero .categoria-badge {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--navy);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 2px;
+      margin-bottom: 16px;
+    }
+    .post-hero h1 {
+      color: #fff;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.25;
+      max-width: 760px;
+    }
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .post-meta span { color: #999; font-size: .85rem; display: flex; align-items: center; gap: 6px; }
+
+    /* ── Imagem de capa ── */
+    .capa-post {
+      width: 100%;
+      max-height: 480px;
+      object-fit: cover;
+      border-radius: 0 0 12px 12px;
+      display: block;
+    }
+
+    /* ── Conteúdo do artigo ── */
+    .artigo-corpo {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 50px 20px 70px;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #333;
+    }
+    .artigo-corpo h2, .artigo-corpo h3 {
+      font-weight: 700;
+      margin-top: 36px;
+      margin-bottom: 14px;
+      color: #111;
+    }
+    .artigo-corpo p { margin-bottom: 20px; }
+    .artigo-corpo ul, .artigo-corpo ol { margin-bottom: 20px; padding-left: 24px; }
+    .artigo-corpo li { margin-bottom: 8px; }
+    .artigo-corpo strong { color: #111; }
+
+    /* ── CTA inline ── */
+    .cta-inline {
+      background: #fffbea;
+      border-left: 4px solid var(--yellow);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin: 32px 0;
+    }
+    .cta-inline p { margin: 0 0 12px; font-weight: 600; }
+
+    /* ── Voltar / posts relacionados ── */
+    .voltar { padding: 30px 0; border-top: 1px solid #eee; }
+    .btn-voltar {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #555;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color .2s;
+    }
+    .btn-voltar:hover { color: var(--yellow); }
+
+    /* Loading */
+    #loading { padding: 80px 0; text-align: center; color: #999; }
+    #conteudo { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar py-2 d-none d-lg-block">
+    <div class="container d-flex justify-content-between align-items-center small">
+      <div class="text-muted d-flex align-items-center gap-3 flex-wrap">
+        <span><i class="bi bi-geo-alt-fill me-1"></i>Atendimento Nacional</span>
+        <span><i class="bi bi-telephone-fill me-1"></i>(11) 95911-8648</span>
+        <span><i class="bi bi-envelope-fill me-1"></i><a class="link-muted" href="mailto:contato@alphasec.com.br">contato@alphasec.com.br</a></span>
+      </div>
+      <a class="btn btn-sm btn-warning" href="#" id="topbarWhatsapp">
+        <i class="bi bi-whatsapp me-1"></i>WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="../../index.html">
+        <img src="../../img/Logo Alphasec 2025.png" alt="Alphasec" class="navbar-logo" />
+        <img src="../../img/servicos/13anos.png" alt="13 anos de certificação" class="navbar-anniversary" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="menu" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../quem-somos.html">Quem Somos</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../servicos.html">Serviços</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../locacao.html">Locação</a></li>
+          <li class="nav-item"><a class="nav-link active" href="index.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../contato.html">Contato</a></li>
+        </ul>
+        <div class="ms-lg-3 d-grid d-lg-flex gap-2 mt-3 mt-lg-0">
+          <a class="btn btn-outline-dark" href="../../contato.html">Solicitar Orçamento</a>
+          <a class="btn btn-warning" href="#" id="navWhatsapp"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Loading -->
+  <div id="loading">
+    <div class="spinner-border text-warning mt-5" role="status"></div>
+    <p class="mt-3">Carregando artigo…</p>
+  </div>
+
+  <!-- Conteúdo do post (injetado pelo JS) -->
+  <div id="conteudo">
+
+    <section class="post-hero">
+      <div class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="index.html">Blog</a></li>
+            <li class="breadcrumb-item active" id="bc-cat">Artigo</li>
+          </ol>
+        </nav>
+        <span class="categoria-badge" id="post-cat"></span>
+        <h1 id="post-titulo"></h1>
+        <div class="post-meta">
+          <span><i class="bi bi-person-circle"></i> <span id="post-autor"></span></span>
+          <span><i class="bi bi-calendar3"></i> <span id="post-data"></span></span>
+        </div>
+      </div>
+    </section>
+
+    <div class="container px-0">
+      <img id="post-imagem" src="" alt="" class="capa-post" />
+    </div>
+
+    <div class="artigo-corpo">
+      <div id="post-conteudo"></div>
+
+      <!-- CTA dentro do artigo -->
+      <div class="cta-inline">
+        <p>Precisa de uma solução de segurança para o seu negócio?</p>
+        <a href="#" id="ctaWhatsapp2" class="btn btn-warning fw-bold">
+          <i class="bi bi-whatsapp me-2"></i>Falar com um especialista
+        </a>
+      </div>
+    </div>
+
+    <div class="container voltar">
+      <a href="index.html" class="btn-voltar">
+        <i class="bi bi-arrow-left"></i> Voltar para o Blog
+      </a>
+    </div>
+
+  </div><!-- /conteudo -->
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 foot-col">
+          <div class="footer-brand">
+            <img src="../../img/LogoBranco.png" alt="Alphasec" class="footer-logo" />
+            <div class="footer-cert-badge">
+              <img src="../../img/servicos/13anos.png" alt="13 anos de certificação">
+            </div>
+            <p>Soluções profissionais em segurança eletrônica para empresas, condomínios e indústrias com atendimento nacional.</p>
+            <div class="footer-certifications">
+              <div class="footer-cert-badge">
+                <img src="../../img/servicos/digiforte.png" alt="Certificação Digiforte">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-2 foot-col">
+          <div class="footer-heading">Navegação</div>
+          <ul class="footer-links">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../../quem-somos.html">Quem Somos</a></li>
+            <li><a href="../../servicos.html">Serviços</a></li>
+            <li><a href="../../locacao.html">Locação</a></li>
+            <li><a href="index.html">Blog</a></li>
+            <li><a href="../../contato.html">Contato</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-3 foot-col foot-col-services">
+          <div class="footer-heading">Serviços</div>
+          <ul class="footer-links">
+            <li><a href="../../servicos.html#cftv">CFTV</a></li>
+            <li><a href="../../servicos.html#acesso">Controle de Acesso</a></li>
+            <li><a href="../../servicos.html#infraestrutura">Infraestrutura</a></li>
+            <li><a href="../../servicos.html#lpr">LPR</a></li>
+            <li><a href="../../servicos.html#locacao-equipamentos">Locação de Equipamentos</a></li>
+            <li><a href="../../servicos.html#manutencao">Manutenção</a></li>
+            <li><a href="../../servicos.html#monitoramento">Monitoramento</a></li>
+            <li><a href="../../servicos.html#projetos">Projetos</a></li>
+            <li><a href="../../servicos.html#video-analitico">Video Analitico</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-3 foot-col footer-contact">
+          <div class="footer-heading">Contato</div>
+          <a href="tel:+5511959118648"><i class="bi bi-telephone-fill"></i>(11) 95911-8648</a>
+          <a href="mailto:contato@alphasec.com.br"><i class="bi bi-envelope-fill"></i>contato@alphasec.com.br</a>
+          <a href="https://wa.me/5511959118648" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i>WhatsApp</a>
+          <a href="#"><i class="bi bi-geo-alt-fill"></i>Atendimento Nacional</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <div class="small text-muted">© <span id="ano"></span> Alphasec — Segurança Eletrônica. Todos os direitos reservados.</div>
+        <div class="small">Criado por <a href="https://www.systexforge.com.br" target="_blank" rel="noopener noreferrer">www.systexforge.com.br</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <a class="to-top" id="toTop" href="javascript:void(0)" aria-label="Voltar ao topo"><i class="bi bi-arrow-up"></i></a>
+  <a class="whatsapp-float" href="#" id="floatWhatsapp" aria-label="Falar no WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48" fill="#fff" aria-hidden="true">
+      <path d="M24 4C13 4 4 13 4 24c0 3.6 1 7 2.7 10L4 44l10.3-2.7c2.9 1.5 6.2 2.4 9.7 2.4 11 0 20-9 20-20S35 4 24 4zm0 36.5c-3.1 0-6-.8-8.5-2.3l-.6-.4-6.1 1.6 1.6-5.9-.4-.6C8.8 30.3 8 27.2 8 24 8 15.2 15.2 8 24 8s16 7.2 16 16-7.2 16.5-16 16.5zm8.8-12.3c-.5-.2-2.8-1.4-3.2-1.5-.4-.2-.7-.2-1 .2s-1.2 1.5-1.4 1.8c-.3.3-.5.4-1 .1-.5-.2-2-.7-3.8-2.3-1.4-1.2-2.3-2.8-2.6-3.2-.3-.5 0-.7.2-1 .2-.2.5-.5.7-.8.2-.3.3-.5.4-.8.1-.3.1-.6 0-.8-.1-.2-1-2.4-1.3-3.3-.4-.9-.7-.8-1-.8h-.9c-.3 0-.8.1-1.2.6-.4.5-1.6 1.6-1.6 3.8s1.7 4.4 1.9 4.7c.2.3 3.3 5 8 7 1.1.5 2 .8 2.7 1 1.1.3 2.1.3 2.9.2.9-.1 2.8-1.1 3.2-2.2.4-1.1.4-2 .3-2.2-.2-.3-.5-.4-1-.6z"/>
+    </svg>
+  </a>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/site.js"></script>
+  <script>
+    function formatarData(dataStr) {
+      const [ano, mes, dia] = dataStr.split('-');
+      const meses = ['janeiro','fevereiro','março','abril','maio','junho',
+                     'julho','agosto','setembro','outubro','novembro','dezembro'];
+      return `${parseInt(dia)} de ${meses[parseInt(mes)-1]} de ${ano}`;
+    }
+
+    async function init() {
+      const params = new URLSearchParams(location.search);
+      const id = params.get('id');
+      if (!id) { location.href = 'index.html'; return; }
+
+      try {
+        const res = await fetch('posts/posts.json?' + Date.now());
+        const posts = await res.json();
+        const post = posts.find(p => p.id === id);
+
+        if (!post) { location.href = 'index.html'; return; }
+
+        // Meta
+        document.getElementById('meta-title').textContent = post.titulo + ' | Blog Alphasec';
+        document.getElementById('meta-desc').setAttribute('content', post.resumo);
+
+        // Hero
+        document.getElementById('bc-cat').textContent = post.categoria;
+        document.getElementById('post-cat').textContent = post.categoria;
+        document.getElementById('post-titulo').textContent = post.titulo;
+        document.getElementById('post-autor').textContent = post.autor;
+        document.getElementById('post-data').textContent = formatarData(post.data);
+        document.getElementById('post-imagem').src = post.imagem;
+        document.getElementById('post-imagem').alt = post.titulo;
+        document.getElementById('post-conteudo').innerHTML = post.conteudo;
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('conteudo').style.display = 'block';
+      } catch(e) {
+        document.getElementById('loading').innerHTML =
+          '<p class="text-danger mt-5">Erro ao carregar o artigo.</p>';
+      }
+    }
+    init();
+  </script>
+</body>
+</html>

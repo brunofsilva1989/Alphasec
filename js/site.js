@@ -272,7 +272,7 @@
     if (!container) return;
 
     try {
-      const res = await fetch(`blog/posts/posts.json?${Date.now()}`);
+      const res = await fetch(`alphasec-blog/blog/posts/posts.json?${Date.now()}`);
       if (!res.ok) throw new Error("Falha ao carregar posts");
 
       const posts = await res.json();
@@ -284,7 +284,7 @@
 
       container.innerHTML = ultimos.map((p) => `
         <div class="col-md-4">
-          <a class="blog-card" href="blog/post.html?id=${p.id}">
+          <a class="blog-card" href="alphasec-blog/blog/post.html?id=${p.id}">
             <img src="${p.imagem}" alt="${p.titulo}" loading="lazy" />
             <div class="corpo">
               <span class="cat-tag">${p.categoria}</span>
