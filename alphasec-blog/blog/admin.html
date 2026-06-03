@@ -12,254 +12,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Editor Rich Text (Quill) -->
   <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="../../img/favicon.ico" />
+  <link rel="stylesheet" href="../../css/site.css" />
+  <link rel="stylesheet" href="css/site.css" />
 
-  <style>
-    :root { --amarelo: #f5c800; --preto: #0a0a0a; }
-    body { font-family: 'Inter', sans-serif; background: #f5f6fa; }
-
-    /* ── Tela de Login ── */
-    #tela-login {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--preto);
-    }
-    .login-box {
-      background: #fff;
-      border-radius: 12px;
-      padding: 40px 36px;
-      width: 100%;
-      max-width: 380px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.3);
-    }
-    .login-box .logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-    .login-box .logo span { color: var(--amarelo); }
-    .login-box p.sub { color: #888; font-size: .88rem; margin-bottom: 28px; }
-    .btn-entrar {
-      background: var(--amarelo);
-      color: var(--preto);
-      font-weight: 700;
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      transition: opacity .2s;
-    }
-    .btn-entrar:hover { opacity: .85; }
-    #erro-login { display: none; }
-
-    /* ── Painel Principal ── */
-    #painel { display: none; }
-
-    /* Topbar admin */
-    .admin-topbar {
-      background: var(--preto);
-      padding: 12px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .admin-topbar .brand { color: #fff; font-weight: 800; font-size: 1.1rem; }
-    .admin-topbar .brand span { color: var(--amarelo); }
-    .btn-sair {
-      background: transparent;
-      border: 1px solid #555;
-      color: #aaa;
-      padding: 5px 16px;
-      border-radius: 4px;
-      font-size: .82rem;
-      cursor: pointer;
-      transition: all .2s;
-    }
-    .btn-sair:hover { border-color: #f44; color: #f44; }
-
-    /* ── Tabs ── */
-    .admin-tabs {
-      background: #fff;
-      border-bottom: 2px solid #eee;
-      padding: 0;
-    }
-    .tab-btn {
-      background: none;
-      border: none;
-      padding: 16px 24px;
-      font-weight: 600;
-      color: #888;
-      border-bottom: 3px solid transparent;
-      cursor: pointer;
-      transition: all .2s;
-    }
-    .tab-btn.ativo, .tab-btn:hover {
-      color: var(--preto);
-      border-bottom-color: var(--amarelo);
-    }
-
-    /* ── Cards de post ── */
-    .post-item {
-      background: #fff;
-      border-radius: 10px;
-      padding: 18px 20px;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      box-shadow: 0 1px 6px rgba(0,0,0,.06);
-    }
-    .post-item img {
-      width: 80px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 6px;
-      flex-shrink: 0;
-    }
-    .post-item .info { flex: 1; min-width: 0; }
-    .post-item .titulo {
-      font-weight: 700;
-      font-size: .95rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 4px;
-    }
-    .post-item .meta { font-size: .78rem; color: #999; }
-    .post-item .acoes { display: flex; gap: 8px; flex-shrink: 0; }
-    .btn-editar {
-      background: #f0f0f0;
-      border: none;
-      border-radius: 5px;
-      padding: 6px 14px;
-      font-size: .82rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background .2s;
-    }
-    .btn-editar:hover { background: var(--amarelo); }
-    .btn-excluir {
-      background: #fff0f0;
-      border: none;
-      border-radius: 5px;
-      padding: 6px 12px;
-      font-size: .82rem;
-      color: #e00;
-      cursor: pointer;
-      transition: background .2s;
-    }
-    .btn-excluir:hover { background: #ffe0e0; }
-    .badge-cat {
-      background: rgba(245,200,0,.15);
-      color: #a07b00;
-      padding: 2px 10px;
-      border-radius: 3px;
-      font-size: .72rem;
-      font-weight: 700;
-    }
-
-    /* ── Formulário do post ── */
-    .form-section {
-      background: #fff;
-      border-radius: 10px;
-      padding: 30px;
-      box-shadow: 0 1px 6px rgba(0,0,0,.06);
-    }
-    .form-section label { font-weight: 600; font-size: .88rem; margin-bottom: 5px; }
-    .form-control:focus { border-color: var(--amarelo); box-shadow: 0 0 0 3px rgba(245,200,0,.15); }
-    #ql-editor { font-size: 1rem; }
-    .ql-toolbar { border-radius: 6px 6px 0 0 !important; position: relative; z-index: 1; }
-    .ql-container { border-radius: 0 0 6px 6px !important; position: relative; z-index: 0; }
-    .ql-editor { min-height: 300px; max-height: 800px; overflow-y: auto; }
-    /* Garante que os botões ficam acima do editor */
-    .form-actions {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      padding-top: 25px;
-      margin-top: 0;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Preview de imagem */
-    #preview-imagem {
-      max-height: 180px;
-      object-fit: cover;
-      width: 100%;
-      border-radius: 8px;
-      display: none;
-      margin-top: 10px;
-    }
-
-    /* Botões de ação do formulário */
-    .btn-salvar {
-      background: var(--amarelo);
-      color: var(--preto);
-      font-weight: 700;
-      border: none;
-      padding: 12px 32px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: opacity .2s;
-    }
-    .btn-salvar:hover { opacity: .85; }
-    .btn-cancelar {
-      background: #f0f0f0;
-      color: #555;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    /* Toast */
-    #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
-    .toast-msg {
-      background: #111;
-      color: #fff;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: .88rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,.2);
-      animation: slideIn .3s ease;
-    }
-    .toast-msg.sucesso { border-left: 4px solid #25d366; }
-    .toast-msg.erro { border-left: 4px solid #e00; }
-    @keyframes slideIn { from { transform: translateX(60px); opacity: 0; } to { transform: none; opacity: 1; } }
-
-    /* Upload de imagem */
-    .upload-area {
-      border: 2px dashed #ddd;
-      border-radius: 8px;
-      padding: 24px 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: all .2s;
-      background: #fafafa;
-      margin-bottom: 4px;
-    }
-    .upload-area:hover { border-color: var(--amarelo); background: #fffbea; }
-    .upload-area.dragover { border-color: var(--amarelo); background: #fffbea; transform: scale(1.01); }
-    .upload-area input[type=file] { display: none; }
-    .upload-area .icone { font-size: 2.2rem; color: #ccc; margin-bottom: 8px; }
-    .upload-area p { margin: 0; font-size: .85rem; color: #888; }
-    .upload-area p strong { color: #444; }
-    .upload-progress { display: none; }
-    .separador-ou {
-      display: flex; align-items: center; gap: 12px;
-      color: #bbb; font-size: .82rem; margin: 12px 0 8px;
-    }
-    .separador-ou::before, .separador-ou::after {
-      content: ''; flex: 1; height: 1px; background: #eee;
-    }
-    </style>
+  
 </head>
 <body>
 
@@ -268,7 +25,10 @@
 ══════════════════════════════════ -->
 <div id="tela-login">
   <div class="login-box">
-    <div class="logo"><span>⬡</span> ALPHASEC</div>
+    <a class="login-logo" href="../../index.html" aria-label="Voltar para a home da Alphasec">
+      <img src="../../img/Logo Alphasec 2025.png" alt="Alphasec" />
+    </a>
+    <div class="login-icon"><i class="bi bi-shield-lock-fill"></i></div>
     <p class="sub">Painel de Gerenciamento do Blog</p>
     <div class="mb-3">
       <label class="form-label fw-semibold">Senha de acesso</label>
@@ -292,7 +52,10 @@
   <!-- Topbar -->
   <div class="admin-topbar">
     <div class="container d-flex align-items-center justify-content-between">
-      <div class="brand"><span>⬡</span> ALPHASEC <span class="text-muted fw-normal fs-6 ms-2">Blog Admin</span></div>
+      <a class="admin-brand" href="../../index.html" aria-label="Voltar para a home da Alphasec">
+        <img src="../../img/LogoBranco.png" alt="Alphasec" />
+        <span>Blog Admin</span>
+      </a>
       <div class="d-flex align-items-center gap-3">
         <a href="index.html" target="_blank" class="text-muted text-decoration-none small">
           <i class="bi bi-box-arrow-up-right"></i> Ver blog
@@ -455,8 +218,6 @@
 <!-- Bootstrap JS + Quill -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
-<script src="js/script.js"></script>
-
 <script src="js/script.js"></script>
 </body>
 </html>

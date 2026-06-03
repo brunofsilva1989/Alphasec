@@ -1,373 +1,402 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog | Alphasec – Segurança Eletrônica</title>
-  <meta name="description" content="Artigos, dicas e novidades sobre segurança eletrônica, CFTV, controle de acesso e mais. Blog da Alphasec." />
-  <link rel="canonical" href="https://seusite.com.br/blog/" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog | Alphasec - Segurança Eletrônica</title>
+  <meta name="description" content="Artigos, dicas e novidades sobre segurança eletrônica, CFTV, controle de acesso e proteção patrimonial." />
+  <link rel="canonical" href="https://alphasec.com.br/alphasec-blog/blog/index.html" />
 
-  <!-- Bootstrap 5.3 -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
-  <!-- Fonte -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <!-- CSS do site -->
-  <link rel="stylesheet" href="../css/site.css" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Alphasec" />
+  <meta property="og:title" content="Blog | Alphasec" />
+  <meta property="og:description" content="Conteúdo técnico e dicas práticas sobre segurança eletrônica para empresas, condomínios e indústrias." />
+  <meta property="og:url" content="https://alphasec.com.br/alphasec-blog/blog/index.html" />
+  <meta property="og:image" content="https://alphasec.com.br/img/Logo%20Alphasec%202025.png" />
+
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"></noscript>
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></noscript>
+  <link rel="icon" type="image/x-icon" href="../../img/favicon.ico" />
+  <link rel="stylesheet" href="../../css/site.css" />
 
   <style>
-    :root {
-      --alpha-preto: #0a0a0a;
-      --alpha-amarelo: #f5c800;
-      --alpha-cinza: #f4f4f4;
-      --alpha-texto: #222;
+    .blog-listing { background: var(--bg-soft); }
+    .page-hero .container {
+      padding-left: calc(var(--bs-gutter-x) * .5);
+      padding-right: calc(var(--bs-gutter-x) * .5);
     }
-
-    body { font-family: 'Inter', sans-serif; color: var(--alpha-texto); }
-
-    /* ── Hero do Blog ── */
-    .blog-hero {
-      background: var(--alpha-preto);
-      padding: 80px 0 60px;
-      position: relative;
-      overflow: hidden;
+    .blog-filters {
+      padding: 2.25rem 0 .5rem;
+      background: var(--bg-soft);
     }
-    .blog-hero::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -80px;
-      width: 380px; height: 380px;
-      background: var(--alpha-amarelo);
-      opacity: .07;
-      border-radius: 50%;
-    }
-    .blog-hero .tag-label {
-      display: inline-block;
-      background: var(--alpha-amarelo);
-      color: var(--alpha-preto);
-      font-size: .72rem;
+    .blog-filter-btn {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: .48rem 1rem;
+      font-size: .88rem;
       font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      padding: 4px 14px;
-      border-radius: 2px;
-      margin-bottom: 18px;
-    }
-    .blog-hero h1 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
-    .blog-hero h1 span { color: var(--alpha-amarelo); }
-    .blog-hero p { color: #aaa; font-size: 1.05rem; max-width: 560px; }
-
-    /* ── Filtros de categoria ── */
-    .filtros { padding: 36px 0 10px; }
-    .btn-filtro {
-      border: 2px solid #ddd;
-      border-radius: 50px;
-      padding: 6px 20px;
-      font-size: .85rem;
-      font-weight: 600;
       background: #fff;
-      color: #555;
-      transition: all .2s;
-      cursor: pointer;
+      color: rgba(15,23,42,.72);
+      transition: color var(--transition), background var(--transition), border-color var(--transition), transform var(--transition);
     }
-    .btn-filtro:hover, .btn-filtro.ativo {
-      border-color: var(--alpha-amarelo);
-      background: var(--alpha-amarelo);
-      color: var(--alpha-preto);
+    .blog-filter-btn:hover,
+    .blog-filter-btn.active {
+      border-color: var(--yellow);
+      background: var(--yellow);
+      color: var(--navy);
+      transform: translateY(-1px);
     }
-
-    /* ── Grid de Posts ── */
-    .grid-posts { padding: 30px 0 70px; }
-
-    .card-post {
-      border: none;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,.08);
-      transition: transform .25s, box-shadow .25s;
-      cursor: pointer;
-      height: 100%;
+    .blog-grid { padding: 2rem 0 5rem; }
+    .blog-post-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      color: inherit;
       display: flex;
       flex-direction: column;
+      height: 100%;
+      overflow: hidden;
       text-decoration: none;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .blog-post-card:hover {
+      border-color: rgba(245,197,24,.75);
+      box-shadow: 0 24px 56px rgba(2,6,23,.16);
       color: inherit;
-    }
-    .card-post:hover {
       transform: translateY(-6px);
-      box-shadow: 0 12px 32px rgba(0,0,0,.13);
     }
-    .card-post .thumb {
-      height: 210px;
+    .blog-post-card .thumb {
+      height: 215px;
       object-fit: cover;
       width: 100%;
+      transition: transform .6s ease;
     }
-    .card-post .corpo {
-      padding: 22px 24px 24px;
-      flex: 1;
+    .blog-post-card:hover .thumb { transform: scale(1.05); }
+    .blog-post-card .body {
       display: flex;
+      flex: 1;
       flex-direction: column;
+      padding: 1.45rem;
     }
-    .card-post .categoria-badge {
-      display: inline-block;
+    .blog-post-card .category {
+      align-self: flex-start;
+      background: rgba(245,197,24,.14);
+      border: 1px solid rgba(245,197,24,.24);
+      border-radius: 999px;
+      color: #9a7400;
       font-size: .72rem;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: .08em;
+      padding: .25rem .7rem;
       text-transform: uppercase;
-      color: var(--alpha-amarelo);
-      background: rgba(245,200,0,.12);
-      padding: 3px 10px;
-      border-radius: 3px;
-      margin-bottom: 12px;
     }
-    .card-post h2 {
+    .blog-post-card h2 {
+      color: var(--text);
       font-size: 1.05rem;
-      font-weight: 700;
-      line-height: 1.4;
-      margin-bottom: 10px;
-      color: var(--alpha-preto);
+      font-weight: 800;
+      line-height: 1.35;
+      margin: .9rem 0 .55rem;
     }
-    .card-post .resumo {
-      font-size: .88rem;
-      color: #666;
-      line-height: 1.6;
+    .blog-post-card .summary {
+      color: var(--muted);
       flex: 1;
+      font-size: .93rem;
+      margin: 0;
     }
-    .card-post .rodape {
-      display: flex;
+    .blog-post-card .meta {
       align-items: center;
-      justify-content: space-between;
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px solid #f0f0f0;
-    }
-    .card-post .data { font-size: .78rem; color: #999; }
-    .card-post .leia-mais {
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      display: flex;
       font-size: .82rem;
-      font-weight: 700;
-      color: var(--alpha-amarelo);
-      text-decoration: none;
+      justify-content: space-between;
+      margin-top: 1.2rem;
+      padding-top: 1rem;
     }
-    .card-post .leia-mais i { transition: transform .2s; }
-    .card-post:hover .leia-mais i { transform: translateX(4px); }
-
-    /* Destaque (primeiro post) */
-    .card-post.destaque { flex-direction: row; }
-    .card-post.destaque .thumb { height: 100%; width: 45%; min-height: 280px; }
-    .card-post.destaque h2 { font-size: 1.35rem; }
-    @media (max-width: 768px) {
-      .card-post.destaque { flex-direction: column; }
-      .card-post.destaque .thumb { width: 100%; height: 220px; }
+    .blog-post-card .read-more {
+      color: var(--navy);
+      font-weight: 800;
+      white-space: nowrap;
     }
-
-    /* Estado vazio / loading */
-    #estado-carregando { padding: 60px 0; text-align: center; color: #999; }
-    #estado-vazio { display: none; padding: 60px 0; text-align: center; }
-
-    /* ── CTA WhatsApp ── */
-    .cta-blog {
-      background: var(--alpha-preto);
-      padding: 60px 0;
+    .blog-post-card .read-more i { color: var(--yellow); transition: transform var(--transition); }
+    .blog-post-card:hover .read-more i { transform: translateX(4px); }
+    .blog-post-card.featured {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    }
+    .blog-post-card.featured .thumb {
+      height: 100%;
+      min-height: 320px;
+    }
+    .blog-post-card.featured h2 { font-size: clamp(1.35rem, 2.4vw, 2rem); }
+    .blog-state {
+      color: var(--muted);
+      padding: 4rem 0;
       text-align: center;
     }
-    .cta-blog h3 { color: #fff; font-weight: 700; margin-bottom: 10px; }
-    .cta-blog p { color: #aaa; margin-bottom: 24px; }
-    .btn-wpp {
-      background: #25d366;
+    .blog-cta {
+      background: var(--navy);
       color: #fff;
-      font-weight: 700;
-      padding: 14px 32px;
-      border-radius: 6px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      transition: background .2s;
+      padding: 4.5rem 0;
     }
-    .btn-wpp:hover { background: #1da851; color: #fff; }
+    .blog-cta p { color: rgba(255,255,255,.68); }
+    @media (max-width: 768px) {
+      .blog-post-card.featured { display: flex; }
+      .blog-post-card.featured .thumb { height: 220px; min-height: 0; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ══ NAVBAR (copie a navbar do seu site aqui) ══ -->
-  <!-- Substitua pelo include/componente da sua navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="../index.html">
-        <span style="color:var(--alpha-amarelo,#f5c800)">⬡</span> ALPHASEC
+  <div class="topbar py-2 d-none d-lg-block">
+    <div class="container d-flex justify-content-between align-items-center small">
+      <div class="text-muted d-flex align-items-center gap-3 flex-wrap">
+        <span><i class="bi bi-geo-alt-fill me-1"></i>Atendimento Nacional</span>
+        <span><i class="bi bi-telephone-fill me-1"></i>(11) 95911-8648</span>
+        <span><i class="bi bi-envelope-fill me-1"></i><a class="link-muted" href="mailto:contato@alphasec.com.br">contato@alphasec.com.br</a></span>
+      </div>
+      <a class="btn btn-sm btn-warning" href="#" id="topbarWhatsapp">
+        <i class="bi bi-whatsapp me-1"></i>WhatsApp
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="../../index.html">
+        <img src="../../img/Logo Alphasec 2025.png" alt="Alphasec" class="navbar-logo" />
+        <img src="../../img/servicos/13anos.png" alt="13 anos de certificação" class="navbar-anniversary" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navMain">
-        <ul class="navbar-nav ms-auto gap-1">
-          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="../quem-somos.html">Quem Somos</a></li>
-          <li class="nav-item"><a class="nav-link" href="../servicos.html">Serviços</a></li>
-          <li class="nav-item"><a class="nav-link" href="../locacao.html">Locação</a></li>
+      <div id="menu" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../quem-somos.html">Quem Somos</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../servicos.html">Serviços</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../locacao.html">Locação</a></li>
           <li class="nav-item"><a class="nav-link active" href="index.html">Blog</a></li>
-          <li class="nav-item"><a class="nav-link" href="../contato.html">Contato</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../contato.html">Contato</a></li>
         </ul>
+        <div class="ms-lg-3 d-grid d-lg-flex gap-2 mt-3 mt-lg-0">
+          <a class="btn btn-outline-dark" href="../../contato.html">Solicitar Orçamento</a>
+          <a class="btn btn-warning" href="#" id="navWhatsapp"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>
+        </div>
       </div>
     </div>
   </nav>
 
-  <!-- ══ HERO ══ -->
-  <section class="blog-hero">
-    <div class="container">
-      <span class="tag-label">Blog</span>
-      <h1>Fique por <span>dentro</span></h1>
-      <p>Artigos, dicas e novidades sobre segurança eletrônica, CFTV, controle de acesso e proteção do seu patrimônio.</p>
+  <header class="page-hero">
+    <div class="hero-slides">
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1600&q=80')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80')"></div>
     </div>
-  </section>
-
-  <!-- ══ FILTROS ══ -->
-  <section class="filtros">
+    <div class="hero-overlay"></div>
     <div class="container">
-      <div class="d-flex flex-wrap gap-2" id="filtros-container">
-        <button class="btn-filtro ativo" data-cat="todos">Todos</button>
-        <!-- Categorias geradas dinamicamente pelo JS -->
-      </div>
+      <span class="badge-premium reveal"><i class="bi bi-journal-richtext"></i>Blog Alphasec</span>
+      <h1 class="display-5 fw-bold mt-3 reveal">Conteúdo para decisões mais seguras</h1>
+      <p class="text-muted lead mb-0 col-lg-7 reveal">Artigos, dicas e novidades sobre CFTV, controle de acesso, locação, monitoramento e proteção patrimonial.</p>
     </div>
-  </section>
-
-  <!-- ══ GRID DE POSTS ══ -->
-  <section class="grid-posts">
-    <div class="container">
-      <div id="estado-carregando">
-        <div class="spinner-border text-warning" role="status"></div>
-        <p class="mt-3">Carregando artigos…</p>
-      </div>
-      <div id="estado-vazio">
-        <i class="bi bi-journal-x fs-1 text-muted"></i>
-        <p class="mt-3 text-muted">Nenhum artigo encontrado nesta categoria.</p>
-      </div>
-      <div class="row g-4" id="grid-posts"></div>
+    <div class="hero-indicators">
+      <button class="hero-dot active" aria-label="Slide 1"></button>
+      <button class="hero-dot" aria-label="Slide 2"></button>
+      <button class="hero-dot" aria-label="Slide 3"></button>
     </div>
-  </section>
+  </header>
 
-  <!-- ══ CTA ══ -->
-  <section class="cta-blog">
-    <div class="container">
-      <h3>Precisa de uma solução de segurança?</h3>
-      <p>Fale agora com um especialista Alphasec. Diagnóstico gratuito.</p>
-      <a href="https://wa.me/5511999999999?text=Olá!%20Vi%20o%20blog%20da%20Alphasec%20e%20quero%20um%20diagnóstico%20gratuito."
-         target="_blank" class="btn-wpp">
-        <i class="bi bi-whatsapp fs-5"></i> Falar no WhatsApp
+  <main class="blog-listing">
+    <section class="blog-filters">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center gap-2" id="filtros-container">
+          <button class="blog-filter-btn active" data-cat="todos" type="button">Todos</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="blog-grid">
+      <div class="container">
+        <div id="estado-carregando" class="blog-state">
+          <div class="spinner-border text-warning" role="status"></div>
+          <p class="mt-3 mb-0">Carregando artigos...</p>
+        </div>
+        <div id="estado-vazio" class="blog-state d-none">
+          <i class="bi bi-journal-x fs-1 text-muted"></i>
+          <p class="mt-3 mb-0">Nenhum artigo encontrado nesta categoria.</p>
+        </div>
+        <div class="row g-4" id="grid-posts"></div>
+      </div>
+    </section>
+  </main>
+
+  <section class="blog-cta">
+    <div class="container text-center reveal">
+      <span class="badge-premium"><i class="bi bi-shield-check"></i>Diagnóstico sem compromisso</span>
+      <h2 class="fw-bold mt-3 mb-2">Precisa de uma solução de segurança?</h2>
+      <p class="mb-4">Fale com um especialista Alphasec e receba uma orientação para o seu ambiente.</p>
+      <a class="btn btn-warning btn-lg px-4" href="#" id="ctaWhatsapp2">
+        <i class="bi bi-whatsapp me-1"></i>Falar no WhatsApp
       </a>
     </div>
   </section>
 
-  <!-- Footer (copie o footer do seu site) -->
-  <footer class="bg-dark text-white py-4 text-center">
+  <footer class="site-footer">
     <div class="container">
-      <small class="text-muted">© 2025 Alphasec – Segurança Eletrônica. Todos os direitos reservados.</small>
+      <div class="row g-4">
+        <div class="col-lg-4 foot-col">
+          <div class="footer-brand">
+            <img src="../../img/LogoBranco.png" alt="Alphasec" class="footer-logo" />
+            <div class="footer-cert-badge">
+              <img src="../../img/servicos/13anos.png" alt="13 anos de certificação">
+            </div>
+            <p>Soluções profissionais em segurança eletrônica para empresas, condomínios e indústrias com atendimento nacional.</p>
+            <div class="footer-certifications">
+              <div class="footer-cert-badge">
+                <img src="../../img/servicos/digiforte.png" alt="Certificação Digiforte">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-2 foot-col">
+          <div class="footer-heading">Navegação</div>
+          <ul class="footer-links">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../../quem-somos.html">Quem Somos</a></li>
+            <li><a href="../../servicos.html">Serviços</a></li>
+            <li><a href="../../locacao.html">Locação</a></li>
+            <li><a href="index.html">Blog</a></li>
+            <li><a href="../../contato.html">Contato</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-3 foot-col foot-col-services">
+          <div class="footer-heading">Serviços</div>
+          <ul class="footer-links">
+            <li><a href="../../servicos.html#cftv">CFTV</a></li>
+            <li><a href="../../servicos.html#acesso">Controle de Acesso</a></li>
+            <li><a href="../../servicos.html#infraestrutura">Infraestrutura</a></li>
+            <li><a href="../../servicos.html#lpr">LPR</a></li>
+            <li><a href="../../servicos.html#locacao-equipamentos">Locação de Equipamentos</a></li>
+            <li><a href="../../servicos.html#manutencao">Manutenção</a></li>
+            <li><a href="../../servicos.html#monitoramento">Monitoramento</a></li>
+            <li><a href="../../servicos.html#projetos">Projetos</a></li>
+            <li><a href="../../servicos.html#video-analitico">Video Analitico</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-3 foot-col footer-contact">
+          <div class="footer-heading">Contato</div>
+          <a href="tel:+5511959118648"><i class="bi bi-telephone-fill"></i>(11) 95911-8648</a>
+          <a href="mailto:contato@alphasec.com.br"><i class="bi bi-envelope-fill"></i>contato@alphasec.com.br</a>
+          <a href="https://wa.me/5511959118648" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i>WhatsApp</a>
+          <a href="#"><i class="bi bi-geo-alt-fill"></i>Atendimento Nacional</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <div class="small text-muted">© <span id="ano"></span> Alphasec - Segurança Eletrônica. Todos os direitos reservados.</div>
+        <div class="small">Criado por <a href="https://www.systexforge.com.br" target="_blank" rel="noopener noreferrer">www.systexforge.com.br</a></div>
+      </div>
     </div>
   </footer>
 
-  <!-- Bootstrap JS -->
+  <a class="to-top" id="toTop" href="javascript:void(0)" aria-label="Voltar ao topo"><i class="bi bi-arrow-up"></i></a>
+  <a class="whatsapp-float" href="#" id="floatWhatsapp" aria-label="Falar no WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48" fill="#fff" aria-hidden="true">
+      <path d="M24 4C13 4 4 13 4 24c0 3.6 1 7 2.7 10L4 44l10.3-2.7c2.9 1.5 6.2 2.4 9.7 2.4 11 0 20-9 20-20S35 4 24 4zm0 36.5c-3.1 0-6-.8-8.5-2.3l-.6-.4-6.1 1.6 1.6-5.9-.4-.6C8.8 30.3 8 27.2 8 24 8 15.2 15.2 8 24 8s16 7.2 16 16-7.2 16.5-16 16.5zm8.8-12.3c-.5-.2-2.8-1.4-3.2-1.5-.4-.2-.7-.2-1 .2s-1.2 1.5-1.4 1.8c-.3.3-.5.4-1 .1-.5-.2-2-.7-3.8-2.3-1.4-1.2-2.3-2.8-2.6-3.2-.3-.5 0-.7.2-1 .2-.2.5-.5.7-.8.2-.3.3-.5.4-.8.1-.3.1-.6 0-.8-.1-.2-1-2.4-1.3-3.3-.4-.9-.7-.8-1-.8h-.9c-.3 0-.8.1-1.2.6-.4.5-1.6 1.6-1.6 3.8s1.7 4.4 1.9 4.7c.2.3 3.3 5 8 7 1.1.5 2 .8 2.7 1 1.1.3 2.1.3 2.9.2.9-.1 2.8-1.1 3.2-2.2.4-1.1.4-2 .3-2.2-.2-.3-.5-.4-1-.6z"/>
+    </svg>
+  </a>
+
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-inner">
+      <div>
+        <div class="fw-bold">Cookies</div>
+        <div class="small text-muted">Usamos cookies para melhorar a experiência no site.</div>
+      </div>
+      <div class="cookie-actions">
+        <button class="btn btn-outline-dark btn-sm" id="cookieRecusar">Recusar</button>
+        <button class="btn btn-dark btn-sm" id="cookieAceitar">Aceitar</button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+  <script src="../../js/site.js"></script>
   <script>
-    /* ══ Formatação de data ══ */
     function formatarData(dataStr) {
-      const [ano, mes, dia] = dataStr.split('-');
-      const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-      return `${dia} ${meses[parseInt(mes)-1]}. ${ano}`;
+      const [ano, mes, dia] = dataStr.split("-");
+      const meses = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+      return `${dia} ${meses[parseInt(mes, 10) - 1]}. ${ano}`;
     }
 
-    /* ══ Template de card normal ══ */
-    function cardNormal(post) {
+    function cardPost(post, destaque) {
       return `
-        <div class="col-md-6 col-lg-4">
-          <a class="card-post" href="post.html?id=${post.id}">
+        <div class="${destaque ? "col-12" : "col-md-6 col-lg-4"}">
+          <a class="blog-post-card${destaque ? " featured" : ""}" href="post.html?id=${post.id}">
             <img src="${post.imagem}" alt="${post.titulo}" class="thumb" loading="lazy" />
-            <div class="corpo">
-              <span class="categoria-badge">${post.categoria}</span>
+            <div class="body">
+              <span class="category">${post.categoria}</span>
               <h2>${post.titulo}</h2>
-              <p class="resumo">${post.resumo}</p>
-              <div class="rodape">
-                <span class="data"><i class="bi bi-calendar3 me-1"></i>${formatarData(post.data)}</span>
-                <span class="leia-mais">Leia mais <i class="bi bi-arrow-right"></i></span>
+              <p class="summary">${post.resumo}</p>
+              <div class="meta">
+                <span><i class="bi bi-calendar3 me-1"></i>${formatarData(post.data)}</span>
+                <span class="read-more">Leia mais <i class="bi bi-arrow-right ms-1"></i></span>
               </div>
             </div>
           </a>
         </div>`;
     }
 
-    /* ══ Template de card destaque (primeiro post) ══ */
-    function cardDestaque(post) {
-      return `
-        <div class="col-12 mb-2">
-          <a class="card-post destaque" href="post.html?id=${post.id}">
-            <img src="${post.imagem}" alt="${post.titulo}" class="thumb" loading="lazy" />
-            <div class="corpo justify-content-center">
-              <span class="categoria-badge">${post.categoria}</span>
-              <h2>${post.titulo}</h2>
-              <p class="resumo">${post.resumo}</p>
-              <div class="rodape">
-                <span class="data"><i class="bi bi-calendar3 me-1"></i>${formatarData(post.data)}</span>
-                <span class="leia-mais">Leia mais <i class="bi bi-arrow-right"></i></span>
-              </div>
-            </div>
-          </a>
-        </div>`;
-    }
-
-    /* ══ Renderiza posts ══ */
     let todosPosts = [];
 
     function renderizar(posts) {
-      const grid = document.getElementById('grid-posts');
-      const vazio = document.getElementById('estado-vazio');
-      grid.innerHTML = '';
-      if (!posts.length) { vazio.style.display = 'block'; return; }
-      vazio.style.display = 'none';
-      posts.forEach((post, i) => {
-        grid.innerHTML += (i === 0) ? cardDestaque(post) : cardNormal(post);
-      });
+      const grid = document.getElementById("grid-posts");
+      const vazio = document.getElementById("estado-vazio");
+      grid.innerHTML = "";
+      if (!posts.length) {
+        vazio.classList.remove("d-none");
+        return;
+      }
+      vazio.classList.add("d-none");
+      grid.innerHTML = posts.map((post, i) => cardPost(post, i === 0)).join("");
     }
 
-    /* ══ Filtros ══ */
     function montarFiltros(posts) {
       const cats = [...new Set(posts.map(p => p.categoria))];
-      const cont = document.getElementById('filtros-container');
+      const cont = document.getElementById("filtros-container");
       cats.forEach(cat => {
-        const btn = document.createElement('button');
-        btn.className = 'btn-filtro';
+        const btn = document.createElement("button");
+        btn.className = "blog-filter-btn";
         btn.dataset.cat = cat;
+        btn.type = "button";
         btn.textContent = cat;
         cont.appendChild(btn);
       });
 
-      cont.addEventListener('click', e => {
-        if (!e.target.classList.contains('btn-filtro')) return;
-        cont.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
-        e.target.classList.add('ativo');
+      cont.addEventListener("click", e => {
+        if (!e.target.classList.contains("blog-filter-btn")) return;
+        cont.querySelectorAll(".blog-filter-btn").forEach(b => b.classList.remove("active"));
+        e.target.classList.add("active");
         const cat = e.target.dataset.cat;
-        renderizar(cat === 'todos' ? todosPosts : todosPosts.filter(p => p.categoria === cat));
+        renderizar(cat === "todos" ? todosPosts : todosPosts.filter(p => p.categoria === cat));
       });
     }
 
-    /* ══ Carrega posts ══ */
     async function init() {
       try {
-        const res = await fetch('posts/posts.json?' + Date.now());
+        const res = await fetch("posts/posts.json?" + Date.now());
         todosPosts = await res.json();
         todosPosts.sort((a, b) => new Date(b.data) - new Date(a.data));
-        document.getElementById('estado-carregando').style.display = 'none';
+        document.getElementById("estado-carregando").style.display = "none";
         montarFiltros(todosPosts);
         renderizar(todosPosts);
-      } catch(e) {
-        document.getElementById('estado-carregando').innerHTML =
-          '<p class="text-danger">Erro ao carregar os artigos. Tente novamente.</p>';
+      } catch {
+        document.getElementById("estado-carregando").innerHTML =
+          '<p class="text-danger mb-0">Erro ao carregar os artigos. Tente novamente.</p>';
       }
     }
 

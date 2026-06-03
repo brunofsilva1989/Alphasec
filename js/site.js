@@ -282,10 +282,16 @@
 
       if (!ultimos.length) throw new Error("Sem posts");
 
+      function blogImageSrc(src) {
+        if (!src) return "";
+        if (/^(https?:|data:|\/)/i.test(src)) return src;
+        return `alphasec-blog/blog/${src.replace(/^\.?\//, "")}`;
+      }
+
       container.innerHTML = ultimos.map((p) => `
         <div class="col-md-4">
           <a class="blog-card" href="alphasec-blog/blog/post.html?id=${p.id}">
-            <img src="${p.imagem}" alt="${p.titulo}" loading="lazy" />
+            <img src="${blogImageSrc(p.imagem)}" alt="${p.titulo}" loading="lazy" />
             <div class="corpo">
               <span class="cat-tag">${p.categoria}</span>
               <h3>${p.titulo}</h3>
