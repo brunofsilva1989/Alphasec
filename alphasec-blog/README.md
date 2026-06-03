@@ -3,14 +3,13 @@
 ## O que foi criado
 
 ```
-alphasec-blog/
-└── blog/
-    ├── index.html         → Página do blog (lista de artigos)
-    ├── post.html          → Página individual de cada artigo
-    ├── admin.html         → Painel de gerenciamento (protegido por senha)
-    ├── salvar-post.php    → API PHP que salva os posts
-    └── posts/
-        └── posts.json     → Banco de dados dos artigos (formato JSON)
+blog/
+├── index.html         → Página do blog (lista de artigos)
+├── post.html          → Página individual de cada artigo
+├── admin.html         → Painel de gerenciamento (protegido por senha)
+├── salvar-post.php    → API PHP que salva os posts
+└── posts/
+    └── posts.json     → Banco de dados dos artigos (formato JSON)
 
 SECAO-INDEX-BLOG.html  → Trecho HTML/CSS/JS para colar no index.html do site
 ```
@@ -19,18 +18,18 @@ SECAO-INDEX-BLOG.html  → Trecho HTML/CSS/JS para colar no index.html do site
 
 ## Instalação (passo a passo)
 
-### 1. Mantenha a pasta `alphasec-blog/` na raiz do site
-Neste projeto, a estrutura correta é manter o blog em `alphasec-blog/blog/`, no mesmo nível que `index.html`.
+### 1. Copie a pasta `blog/` para o seu servidor
+Coloque a pasta `blog/` dentro da raiz do site (mesmo nível que `index.html`).
 
 ### 2. Ajuste as permissões da pasta `posts/`
 No servidor, garanta que o PHP possa escrever na pasta:
 ```bash
-chmod 755 alphasec-blog/blog/posts/
-chmod 644 alphasec-blog/blog/posts/posts.json
+chmod 755 blog/posts/
+chmod 644 blog/posts/posts.json
 ```
 
 ### 3. Defina a senha do admin
-Abra `alphasec-blog/blog/admin.html` e `alphasec-blog/blog/salvar-post.php`.
+Abra `blog/admin.html` e `blog/salvar-post.php`.
 Em **ambos os arquivos**, altere a senha padrão `alphasec2025` para uma senha forte.
 
 No `admin.html`:
@@ -52,7 +51,7 @@ Nas páginas `index.html`, `quem-somos.html`, `servicos.html`, `locacao.html` e 
 adicione no menu:
 ```html
 <li class="nav-item">
-  <a class="nav-link" href="alphasec-blog/blog/index.html">Blog</a>
+  <a class="nav-link" href="blog/index.html">Blog</a>
 </li>
 ```
 
@@ -61,7 +60,7 @@ adicione no menu:
 ## Como o cliente usa (sem tocar em código)
 
 ### Acessar o painel
-1. Abrir o navegador e ir para: `https://seusite.com.br/alphasec-blog/blog/admin.html`
+1. Abrir o navegador e ir para: `https://seusite.com.br/blog/admin.html`
 2. Digitar a senha e clicar em **Entrar**
 
 ### Criar um novo artigo

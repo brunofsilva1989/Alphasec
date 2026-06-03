@@ -8,7 +8,7 @@
  */
 
 // ── Configuração ──────────────────────────────────────────────
-define('SENHA_CORRETA', 'alphasec2025'); // ← altere para uma senha forte
+define('SENHA_CORRETA', 'alphasec2026'); // ← altere para uma senha forte
 define('POSTS_FILE', __DIR__ . '/posts/posts.json');
 
 // ── CORS / Headers ───────────────────────────────────────────

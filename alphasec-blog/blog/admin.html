@@ -168,9 +168,20 @@
     }
     .form-section label { font-weight: 600; font-size: .88rem; margin-bottom: 5px; }
     .form-control:focus { border-color: var(--amarelo); box-shadow: 0 0 0 3px rgba(245,200,0,.15); }
-    #ql-editor { min-height: 300px; font-size: 1rem; }
-    .ql-toolbar { border-radius: 6px 6px 0 0 !important; }
-    .ql-container { border-radius: 0 0 6px 6px !important; min-height: 300px; }
+    #ql-editor { font-size: 1rem; }
+    .ql-toolbar { border-radius: 6px 6px 0 0 !important; position: relative; z-index: 1; }
+    .ql-container { border-radius: 0 0 6px 6px !important; position: relative; z-index: 0; }
+    .ql-editor { min-height: 300px; max-height: 800px; overflow-y: auto; }
+    /* Garante que os botões ficam acima do editor */
+    .form-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding-top: 25px;
+      margin-top: 0;
+      position: relative;
+      z-index: 2;
+    }
 
     /* Preview de imagem */
     #preview-imagem {
@@ -222,7 +233,33 @@
     .toast-msg.sucesso { border-left: 4px solid #25d366; }
     .toast-msg.erro { border-left: 4px solid #e00; }
     @keyframes slideIn { from { transform: translateX(60px); opacity: 0; } to { transform: none; opacity: 1; } }
-  </style>
+
+    /* Upload de imagem */
+    .upload-area {
+      border: 2px dashed #ddd;
+      border-radius: 8px;
+      padding: 24px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s;
+      background: #fafafa;
+      margin-bottom: 4px;
+    }
+    .upload-area:hover { border-color: var(--amarelo); background: #fffbea; }
+    .upload-area.dragover { border-color: var(--amarelo); background: #fffbea; transform: scale(1.01); }
+    .upload-area input[type=file] { display: none; }
+    .upload-area .icone { font-size: 2.2rem; color: #ccc; margin-bottom: 8px; }
+    .upload-area p { margin: 0; font-size: .85rem; color: #888; }
+    .upload-area p strong { color: #444; }
+    .upload-progress { display: none; }
+    .separador-ou {
+      display: flex; align-items: center; gap: 12px;
+      color: #bbb; font-size: .82rem; margin: 12px 0 8px;
+    }
+    .separador-ou::before, .separador-ou::after {
+      content: ''; flex: 1; height: 1px; background: #eee;
+    }
+    </style>
 </head>
 <body>
 
@@ -341,14 +378,41 @@
 
           <!-- Imagem -->
           <div class="col-12">
-            <label>URL da imagem de capa *</label>
+            <label>Imagem de capa</label>
+
+            <!-- Área de upload -->
+            <div class="upload-area" id="upload-area"
+                 onclick="document.getElementById('f-arquivo').click()"
+                 ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropImagem(event)">
+              <input type="file" id="f-arquivo" accept="image/jpeg,image/png,image/webp,image/gif"
+                     onchange="uploadImagem(this.files[0])" />
+              <div class="icone"><i class="bi bi-cloud-arrow-up"></i></div>
+              <p><strong>Clique para escolher uma foto</strong> ou arraste aqui</p>
+              <p class="mt-1">JPG, PNG, WebP ou GIF — máx. 5 MB</p>
+            </div>
+
+            <!-- Progresso -->
+            <div class="upload-progress" id="upload-progress">
+              <div class="d-flex align-items-center gap-2 text-muted small mt-2">
+                <div class="spinner-border spinner-border-sm text-warning"></div>
+                <span id="upload-status">Enviando imagem…</span>
+              </div>
+            </div>
+
+            <!-- Separador -->
+            <div class="separador-ou">ou use uma URL externa</div>
+
+            <!-- Campo URL -->
             <input type="url" id="f-imagem" class="form-control"
-                   placeholder="https://exemplo.com/imagem.jpg  (use Unsplash, Google Fotos, etc.)"
+                   placeholder="https://exemplo.com/imagem.jpg"
                    oninput="previewImg()" />
             <small class="text-muted">
-              💡 Dica: vá em <a href="https://unsplash.com" target="_blank">unsplash.com</a>, encontre uma foto, clique com botão direito → "Copiar endereço da imagem" e cole aqui.
+              💡 Dica: <a href="https://unsplash.com" target="_blank">unsplash.com</a> tem fotos gratuitas — botão direito → "Copiar endereço da imagem".
             </small>
-            <img id="preview-imagem" src="" alt="Preview" />
+
+            <!-- Preview -->
+            <img id="preview-imagem" src="" alt="Preview"
+                 style="max-height:180px;object-fit:cover;width:100%;border-radius:8px;display:none;margin-top:10px;" />
           </div>
 
           <!-- Destaque -->
@@ -367,18 +431,19 @@
             <div id="ql-editor"></div>
           </div>
 
-          <!-- Botões -->
-          <div class="col-12 d-flex gap-3 pt-2">
-            <button class="btn-salvar" onclick="salvarPost()">
-              <i class="bi bi-floppy me-1"></i>Salvar artigo
-            </button>
-            <button class="btn-cancelar" onclick="trocarTab('lista'); limparForm()">
-              Cancelar
-            </button>
-          </div>
-
         </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-salvar" id="btn-salvar-post" onclick="salvarPost(event)">
+            <i class="bi bi-floppy me-1"></i>Salvar artigo
+          </button>
+          <button type="button" class="btn-cancelar" onclick="trocarTab('lista'); limparForm()">
+            Cancelar
+          </button>
+        </div>
+        <div id="feedback-salvar" class="alert mt-3 mb-0 d-none" role="alert"></div>
       </div><!-- /form-section -->
+
     </div><!-- /tab-novo -->
 
   </div>
@@ -390,282 +455,8 @@
 <!-- Bootstrap JS + Quill -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<script src="js/script.js"></script>
 
-<script>
-/* ══════════════════════════════════════════
-   CONFIGURAÇÃO
-══════════════════════════════════════════ */
-
-// ⚠️ ALTERE ESTA SENHA ANTES DE PUBLICAR ⚠️
-const SENHA_ADMIN = 'alphasec2025';
-
-// Caminho para o PHP que salva os posts
-const API_URL = 'salvar-post.php';
-
-
-/* ══════════════════════════════════════════
-   AUTENTICAÇÃO
-══════════════════════════════════════════ */
-let autenticado = false;
-
-function tentarLogin() {
-  const senha = document.getElementById('campo-senha').value;
-  if (senha === SENHA_ADMIN) {
-    autenticado = true;
-    sessionStorage.setItem('blog_auth', btoa(senha));
-    document.getElementById('tela-login').style.display = 'none';
-    document.getElementById('painel').style.display = 'block';
-    carregarLista();
-    initEditor();
-    // Data padrão = hoje
-    document.getElementById('f-data').value = new Date().toISOString().split('T')[0];
-  } else {
-    document.getElementById('erro-login').style.display = 'block';
-    document.getElementById('campo-senha').value = '';
-    document.getElementById('campo-senha').focus();
-  }
-}
-
-function sair() {
-  sessionStorage.removeItem('blog_auth');
-  document.getElementById('tela-login').style.display = 'flex';
-  document.getElementById('painel').style.display = 'none';
-}
-
-// Auto-login se a sessão ainda existe
-window.addEventListener('load', () => {
-  const saved = sessionStorage.getItem('blog_auth');
-  if (saved && atob(saved) === SENHA_ADMIN) {
-    autenticado = true;
-    document.getElementById('tela-login').style.display = 'none';
-    document.getElementById('painel').style.display = 'block';
-    carregarLista();
-    initEditor();
-    document.getElementById('f-data').value = new Date().toISOString().split('T')[0];
-  }
-
-  // Enter no campo de senha
-  document.getElementById('campo-senha').addEventListener('keydown', e => {
-    if (e.key === 'Enter') tentarLogin();
-  });
-
-  // Contador de resumo
-  document.getElementById('f-resumo').addEventListener('input', () => {
-    document.getElementById('cont-resumo').textContent =
-      document.getElementById('f-resumo').value.length;
-  });
-});
-
-
-/* ══════════════════════════════════════════
-   EDITOR QUILL (Rich Text)
-══════════════════════════════════════════ */
-let quill;
-
-function initEditor() {
-  if (quill) return;
-  quill = new Quill('#ql-editor', {
-    theme: 'snow',
-    placeholder: 'Escreva o conteúdo completo do artigo aqui…\n\nUse os botões acima para formatar o texto, inserir títulos, listas, negrito, etc.',
-    modules: {
-      toolbar: [
-        [{ header: [2, 3, false] }],
-        ['bold', 'italic', 'underline'],
-        [{ list: 'ordered' }, { list: 'bullet' }],
-        ['link'],
-        ['clean']
-      ]
-    }
-  });
-}
-
-
-/* ══════════════════════════════════════════
-   GERENCIAMENTO DOS POSTS
-══════════════════════════════════════════ */
-let posts = [];
-
-function formatarData(d) {
-  const [a,m,di] = d.split('-');
-  const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-  return `${di} ${meses[parseInt(m)-1]}. ${a}`;
-}
-
-async function carregarLista() {
-  try {
-    const res = await fetch('posts/posts.json?' + Date.now());
-    posts = await res.json();
-    posts.sort((a,b) => new Date(b.data) - new Date(a.data));
-    renderizarLista();
-  } catch(e) {
-    document.getElementById('lista-posts').innerHTML =
-      '<p class="text-danger">Erro ao carregar posts. Verifique se posts/posts.json existe.</p>';
-  }
-}
-
-function renderizarLista() {
-  const el = document.getElementById('lista-posts');
-  if (!posts.length) {
-    el.innerHTML = '<p class="text-muted text-center py-5">Nenhum artigo publicado ainda. Crie o primeiro!</p>';
-    return;
-  }
-  el.innerHTML = posts.map(p => `
-    <div class="post-item">
-      <img src="${p.imagem}" alt="${p.titulo}" onerror="this.src='https://via.placeholder.com/80x60?text=IMG'" />
-      <div class="info">
-        <div class="titulo">${p.titulo}</div>
-        <div class="meta">
-          <span class="badge-cat me-2">${p.categoria}</span>
-          <i class="bi bi-calendar3"></i> ${formatarData(p.data)}
-          ${p.destaque ? '<span class="ms-2 badge bg-warning text-dark">⭐ Destaque</span>' : ''}
-        </div>
-      </div>
-      <div class="acoes">
-        <button class="btn-editar" onclick="editarPost('${p.id}')">
-          <i class="bi bi-pencil me-1"></i>Editar
-        </button>
-        <button class="btn-excluir" onclick="excluirPost('${p.id}')">
-          <i class="bi bi-trash"></i>
-        </button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function editarPost(id) {
-  const p = posts.find(x => x.id === id);
-  if (!p) return;
-  document.getElementById('edit-id').value = p.id;
-  document.getElementById('f-titulo').value = p.titulo;
-  document.getElementById('f-resumo').value = p.resumo;
-  document.getElementById('cont-resumo').textContent = p.resumo.length;
-  document.getElementById('f-categoria').value = p.categoria;
-  document.getElementById('f-autor').value = p.autor;
-  document.getElementById('f-data').value = p.data;
-  document.getElementById('f-imagem').value = p.imagem;
-  document.getElementById('f-destaque').checked = !!p.destaque;
-  previewImg();
-  quill.root.innerHTML = p.conteudo;
-  document.getElementById('form-titulo-aba').textContent = 'Editando artigo';
-  trocarTab('novo');
-}
-
-function excluirPost(id) {
-  const p = posts.find(x => x.id === id);
-  if (!p) return;
-  if (!confirm(`Tem certeza que deseja excluir o artigo:\n\n"${p.titulo}"\n\nEssa ação não pode ser desfeita.`)) return;
-  posts = posts.filter(x => x.id !== id);
-  persistir('Artigo excluído com sucesso.');
-}
-
-async function salvarPost() {
-  // Validações
-  const titulo = document.getElementById('f-titulo').value.trim();
-  const resumo = document.getElementById('f-resumo').value.trim();
-  const categoria = document.getElementById('f-categoria').value;
-  const autor = document.getElementById('f-autor').value.trim() || 'Equipe Alphasec';
-  const data = document.getElementById('f-data').value;
-  const imagem = document.getElementById('f-imagem').value.trim();
-  const destaque = document.getElementById('f-destaque').checked;
-  const conteudo = quill.root.innerHTML;
-  const textoConteudo = quill.getText().trim();
-
-  if (!titulo) { toast('Informe o título do artigo.', 'erro'); return; }
-  if (!resumo) { toast('Informe o resumo.', 'erro'); return; }
-  if (!categoria) { toast('Selecione uma categoria.', 'erro'); return; }
-  if (!data) { toast('Informe a data de publicação.', 'erro'); return; }
-  if (!imagem) { toast('Informe a URL da imagem de capa.', 'erro'); return; }
-  if (!textoConteudo || textoConteudo.length < 50) { toast('O conteúdo do artigo está muito curto.', 'erro'); return; }
-
-  const editId = document.getElementById('edit-id').value;
-  const slug = titulo.toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-
-  if (editId) {
-    // Atualizar post existente
-    const idx = posts.findIndex(p => p.id === editId);
-    if (idx >= 0) {
-      posts[idx] = { ...posts[idx], titulo, slug, resumo, categoria, autor, data, imagem, destaque, conteudo };
-    }
-  } else {
-    // Novo post
-    const novoId = String(Date.now());
-    posts.unshift({ id: novoId, titulo, slug, resumo, conteudo, imagem, categoria, autor, data, destaque });
-  }
-
-  persistir(editId ? 'Artigo atualizado com sucesso!' : 'Artigo publicado com sucesso!');
-  limparForm();
-  trocarTab('lista');
-}
-
-async function persistir(mensagem) {
-  // Salva via PHP
-  try {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ posts, senha: SENHA_ADMIN })
-    });
-    const json = await res.json();
-    if (json.ok) {
-      toast(mensagem, 'sucesso');
-      carregarLista();
-    } else {
-      toast('Erro ao salvar: ' + (json.erro || 'resposta inválida do servidor'), 'erro');
-    }
-  } catch(e) {
-    // Fallback: download do JSON para o usuário salvar manualmente
-    toast('PHP não encontrado. Baixando JSON para salvar manualmente…', 'erro');
-    setTimeout(() => {
-      const blob = new Blob([JSON.stringify(posts, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'posts.json';
-      a.click();
-    }, 1500);
-  }
-}
-
-function limparForm() {
-  document.getElementById('edit-id').value = '';
-  document.getElementById('f-titulo').value = '';
-  document.getElementById('f-resumo').value = '';
-  document.getElementById('cont-resumo').textContent = '0';
-  document.getElementById('f-categoria').value = '';
-  document.getElementById('f-autor').value = 'Equipe Alphasec';
-  document.getElementById('f-data').value = new Date().toISOString().split('T')[0];
-  document.getElementById('f-imagem').value = '';
-  document.getElementById('f-destaque').checked = false;
-  document.getElementById('preview-imagem').style.display = 'none';
-  document.getElementById('form-titulo-aba').textContent = 'Novo Artigo';
-  if (quill) quill.setText('');
-}
-
-/* ══ UI helpers ══ */
-function trocarTab(tab) {
-  document.getElementById('tab-lista').style.display = tab === 'lista' ? 'block' : 'none';
-  document.getElementById('tab-novo').style.display = tab === 'novo' ? 'block' : 'none';
-  document.querySelectorAll('.tab-btn').forEach((b, i) => {
-    b.classList.toggle('ativo', (i === 0 && tab === 'lista') || (i === 1 && tab === 'novo'));
-  });
-}
-
-function previewImg() {
-  const url = document.getElementById('f-imagem').value;
-  const img = document.getElementById('preview-imagem');
-  if (url) { img.src = url; img.style.display = 'block'; }
-  else { img.style.display = 'none'; }
-}
-
-function toast(msg, tipo = 'sucesso') {
-  const c = document.getElementById('toast-container');
-  const t = document.createElement('div');
-  t.className = `toast-msg ${tipo}`;
-  t.innerHTML = `<i class="bi bi-${tipo === 'sucesso' ? 'check-circle-fill text-success' : 'exclamation-triangle-fill text-danger'}"></i> ${msg}`;
-  c.appendChild(t);
-  setTimeout(() => t.remove(), 4000);
-}
-</script>
+<script src="js/script.js"></script>
 </body>
 </html>
